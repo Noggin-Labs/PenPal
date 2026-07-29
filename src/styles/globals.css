@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Specially designed OpenDyslexic Font to eliminate scotopic sensitivity / Irlen glare and prevent flipping */
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/dist/woff/OpenDyslexic-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/dist/woff/OpenDyslexic-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+:root {
+  --font-family-current: OpenDyslexic, "Comic Sans MS", Chalkboard SE, sans-serif;
+  --line-height-current: 1.8;
+  --letter-spacing-current: 2px;
+  --word-spacing-current: 4px;
+  --font-size-multiplier: 1.15;
+  --theme-bg-color: #FCF9F2;
+  --theme-text-color: #2D2A24;
+  --theme-card-bg: #FFFFFF;
+  --theme-border-color: #E9E3D3;
+  --theme-accent-color: #3B82F6;
+}
+
+body {
+  background-color: var(--theme-bg-color);
+  color: var(--theme-text-color);
+  font-family: var(--font-family-current);
+  line-height: var(--line-height-current);
+  letter-spacing: var(--letter-spacing-current);
+  word-spacing: var(--word-spacing-current);
+  font-size: calc(1rem * var(--font-size-multiplier));
+  transition: background-color 0.25s ease, color 0.25s ease, font-family 0.25s ease;
+  min-height: 100vh;
+}
+
+/* Accessibility dynamic utilities */
+.a11y-container {
+  font-size: calc(1rem * var(--font-size-multiplier));
+}
+
+/* Scrollbars customized to avoid harsh high contrast lines */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.45);
+}
+
+/* Focus styles for Keyboard Navigability */
+*:focus-visible {
+  outline: 3px solid var(--theme-accent-color);
+  outline-offset: 2px;
+}
