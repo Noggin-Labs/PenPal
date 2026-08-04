@@ -19,8 +19,9 @@
 - [🌟 Problem Statement & Vision](#-problem-statement--vision)
 - [👥 Target Audiences & Brand Identity](#-target-audiences--brand-identity)
 - [🧩 Dyslexia-Friendly Design System](#-dyslexia-friendly-design-system)
-- [🚀 Key Core Features](#-key-core-features)
-- [🛡️ Privacy & Mock Data Persistence](#️-privacy--mock-data-persistence)
+- [♿ WCAG 2.1 AA Compliance Matrix](#-wcag-21-aa-compliance-matrix)
+- [🚀 Key Core Features & Role Portals](#-key-core-features--role-portals)
+- [🛡️ Privacy & Local Persistence Mapping](#️-privacy--local-persistence-mapping)
 - [🛠️ Technical Architecture & Directory Structure](#️-technical-architecture--directory-structure)
 - [💻 Deep Dive Developer Implementation Examples](#-deep-dive-developer-implementation-examples)
 - [⚙️ Local Installation & Environment Setup](#️-local-installation--environment-setup)
@@ -91,30 +92,49 @@ Rather than tacking accessibility on as an afterthought, PenPal embeds visual an
 
 ---
 
-## 🚀 Key Core Features
+## ♿ WCAG 2.1 AA Compliance Matrix
+
+PenPal is engineered to adhere to the Web Content Accessibility Guidelines (WCAG) 2.1 AA criteria, providing practical visual and sensory adapters.
+
+| WCAG Criteria | Requirement Name | PenPal Implementation |
+| :--- | :--- | :--- |
+| **1.4.3** | Contrast (Minimum) | Dynamic themes (e.g., Warm Anti-Glare Cream `#FCF9F2` on `#2D2A24` text, Pastel Mint) ensure a contrast ratio of at least 4.5:1. High Contrast Dark Mode is available for users requiring maximum contrast. |
+| **1.4.4** | Resize Text | Global font multiplier scales all typography programmatically (from `0.8x` to `1.5x`) using CSS variables without breaking layout flow or clipping text container bounds. |
+| **1.4.12** | Text Spacing | Granular sliders allow the user to expand CSS variable-controlled line height (up to `2.2`), letter spacing (up to `5px`), and word spacing (up to `10px`) dynamically to mitigate visual crowding. |
+| **2.1.1** | Keyboard Accessible | Entire simulation environment is keyboard-navigable with clear focus indicators, interactive modal prompts, and standard tab-stops. |
+| **3.1.1** | Language of Page | Uses standard semantic layout rendering with custom language attributes (`lang="es-ES"` or `lang="en-GB"`) on components and vocal speech synthesis queries to instruct assistive devices. |
+
+---
+
+## 🚀 Key Core Features & Role Portals
+
+PenPal divides its architecture into three distinct, dedicated portal routes corresponding to our main target audiences.
 
 ### 1. Interactive Learner Dashboard (`/dashboard`)
+The learner's workspace focuses on supportive, low-stress language building:
 * **Peer-to-Peer PenPal Matching:** Vetted matching with international partners (such as *Mateo from Madrid*). Includes structured conversation frames and translation assists.
-* **Word Breakdown Tooltip Desk:** Clicking any word in the chat immediately reveals a color-coded syllable breakdown, phonetic transcriptions, and localized translation.
-* **Syllable Color Scaffolding:** Visually separates syllables in alternating colors (e.g., **fút · bol** in rose/emerald blocks) to make pronunciation patterns intuitive.
+* **Syllable breakdown & Tooltips:** Clicking any word in the chat reveals a color-coded syllable breakdown, phonetic transcriptions, and English translation.
+* **Syllable Color Scaffolding:** Separates syllables into alternating visual blocks (e.g., **fút · bol** in rose/emerald blocks) to make pronunciation patterns intuitive.
 * **Asynchronous Writing Scaffolds:** Expandable writing helpers featuring Spanish sentence frames (e.g., *"Me gusta mucho..."*) and interactive vocabulary suggestion chips.
 * **Cooperative Quizzes:** Stress-free, collaborative matching activities solved with partner dialogue hints instead of competitive timers.
 
 ### 2. Parent Progress & Insights Board (`/parent`)
+The Parent Portal provides high-quality insights and direct support:
 * **Confidence Metrics Tracker:** Visual summary of the child's reading stamina, writing autonomy, and vocabulary acquisition.
 * **Parental Override Controls:** Parents can remotely customize default contrast themes, text-scaling, and vocal playback speeds to align with their child's daily stamina.
 * **Portfolio Exporter:** One-click generation of progress reports to share with clinical teams or educators.
 
 ### 3. SEN Educator & Administration Desk (`/educator`)
+The Educator Board is designed for classroom monitoring and school compliance:
 * **Classroom Roster Analytics:** Real-time visibility of student progression against set targets.
 * **IEP Goal Integration:** Direct mapping of application milestones (e.g., messages sent, reading ruler usage) to formal IEP objectives.
 * **Accommodation Override Controls:** Remotely adjust student font profiles, zoom scales, or default high-contrast layouts.
 
 ---
 
-## 🛡️ Privacy & Mock Data Persistence
+## 🛡️ Privacy & Local Persistence Mapping
 
-To prioritize visual security and keep our application entirely self-contained, **PenPal utilizes local storage (`localStorage`)** to mock database persistence and maintain cross-role settings dynamically.
+To prioritize data privacy and keep our application entirely self-contained, **PenPal utilizes local storage (`localStorage`)** to mock database persistence and maintain cross-role settings dynamically.
 
 ```
                       ┌────────────────────────────────────────┐
@@ -129,14 +149,19 @@ To prioritize visual security and keep our application entirely self-contained, 
   └──────────────────┘          └──────────────────┘          └──────────────────┘
 ```
 
-* **Learner Activity Integration:** Student interaction metrics (such as messages dispatched or cooperative quiz scores earned) are written directly to local keys like `penpal_messages_sent_count` and `penpal_quiz_points`.
-* **Cross-Role Synchronicity:** When a parent or educator remotely updates Alex's typography settings or visual contrast values in their respective portals, the changes write to our centralized React state context and synchronize instantly to the learner's dashboard interface.
+The system binds the following localStorage keys to preserve simulation state:
+
+* `penpal_a11y_settings`: Holds the serialized user accessibility preferences including typeface selectors, font scaling multiplier, line spacing, and color schemes.
+* `penpal_messages`: Stores asynchronous message histories between the user and their designated Spanish PenPal partner.
+* `penpal_messages_sent_count`: An active tracker representing the total count of messages drafted and successfully dispatched by the learner.
+* `penpal_quiz_points`: The running cooperative experience point total, incrementing when a user successfully completes peer-assisted puzzles.
+* `penpal_learned_vocab`: Tracks the vocabulary list containing clicked terms parsed using the word analyzer.
 
 ---
 
 ## 🛠️ Technical Architecture & Directory Structure
 
-PenPal is engineered to be modern, modular, and extensible. We leverage **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**.
+PenPal is built with a modern Next.js structure, making custom accessibility configurations highly accessible.
 
 ### **Directory Blueprint**
 
@@ -183,6 +208,7 @@ interface AccessibilitySettings {
   fontFamily: DyslexiaFont;
   lineHeight: number;
   letterSpacing: number;
+  wordSpacing: number;
   themeColor: ThemeColor;
   fontSizeMultiplier: number;
   readingRulerEnabled: boolean;
@@ -198,18 +224,17 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
     fontFamily: 'open-dyslexic',
     lineHeight: 1.8,
     letterSpacing: 2.0,
+    wordSpacing: 4.0,
     themeColor: 'default-cream',
     fontSizeMultiplier: 1.15,
     readingRulerEnabled: false,
     speechSpeed: 0.85,
     distractionFree: false,
-    setSettings: () => {},
   });
 
   useEffect(() => {
     const root = document.documentElement;
 
-    // Dynamically update CSS custom properties on the DOM root
     const fontMapping = {
       'open-dyslexic': 'OpenDyslexic, "Comic Sans MS", Chalkboard SE, sans-serif',
       'sans-serif': 'Arial, sans-serif',
@@ -234,6 +259,9 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
     root.style.setProperty('--theme-bg-color', bgColors[settings.themeColor]);
     root.style.setProperty('--theme-text-color', textColors[settings.themeColor]);
     root.style.setProperty('--font-size-multiplier', `${settings.fontSizeMultiplier}`);
+    root.style.setProperty('--line-height-current', `${settings.lineHeight}`);
+    root.style.setProperty('--letter-spacing-current', `${settings.letterSpacing}px`);
+    root.style.setProperty('--word-spacing-current', `${settings.wordSpacing}px`);
   }, [settings]);
 
   return (
@@ -241,12 +269,6 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
       {children}
     </AccessibilityContext.Provider>
   );
-};
-
-export const useAccessibility = () => {
-  const context = useContext(AccessibilityContext);
-  if (!context) throw new Error('useAccessibility must be used within an AccessibilityProvider');
-  return context;
 };
 ```
 
@@ -327,16 +349,20 @@ cd PenPal
 npm install
 ```
 
-### 3. Start Local Development Server
+### 3. Run Validation Commands
+```bash
+# Run typescript compilation verification
+npm run build
+
+# Run project linter checks
+npm run lint
+```
+
+### 4. Start Local Development Server
 ```bash
 npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) inside your web browser to interact with the application.
-
-### 4. Build and Compile for Production
-```bash
-npm run build
-```
 
 ---
 
