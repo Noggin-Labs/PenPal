@@ -17,13 +17,13 @@
 
 ## 📖 Table of Contents
 - [🌟 Problem Statement & Vision](#-problem-statement--vision)
-- [👥 Target Audiences & Brand Identity](#-target-audiences--brand-identity)
+- [👥 Simulated Multi-Role Playgrounds](#-simulated-multi-role-playgrounds)
 - [🧩 Dyslexia-Friendly Design System](#-dyslexia-friendly-design-system)
 - [🚀 Key Core Features](#-key-core-features)
-- [🛡️ Privacy & Mock Data Persistence](#️-privacy--mock-data-persistence)
+- [🛡️ Global State, Privacy & Cross-Portal Synchronization](#️-global-state-privacy--cross-portal-synchronization)
 - [🛠️ Technical Architecture & Directory Structure](#️-technical-architecture--directory-structure)
 - [💻 Deep Dive Developer Implementation Examples](#-deep-dive-developer-implementation-examples)
-- [⚙️ Local Installation & Environment Setup](#️-local-installation--environment-setup)
+- [⚙️ Local Installation & Quality Assurance](#️-local-installation--quality-assurance)
 - [🤝 Contribution Guidelines](#-contribution-guidelines)
 - [📄 License](#-license)
 
@@ -37,53 +37,49 @@ Traditional language learning applications rely heavily on dense text walls, rap
 
 ---
 
-## 👥 Target Audiences & Brand Identity
+## 👥 Simulated Multi-Role Playgrounds
 
-Our branding and feature sets are carefully tailored to support four primary user categories:
+PenPal includes a fully synchronized multi-role simulation engine, allowing developers and educators to immediately switch perspectives and experience how settings change lives across roles.
 
 ```
                           ┌───────────────────────────┐
-                          │   PENPAL DOCKING STATION  │
+                          │    PENPAL SIMULATOR HUB   │
                           └─────────────┬─────────────┘
                                         │
              ┌──────────────────────────┼──────────────────────────┐
              ▼                          ▼                          ▼
    ┌───────────────────┐      ┌───────────────────┐      ┌───────────────────┐
    │ Dyslexic Learner  │      │ Parents/Guardians │      │ SEN Departments   │
-   │  (Interactive)    │      │  (Insight & Care) │      │  (IEP Management) │
+   │   (/dashboard)    │      │     (/parent)     │      │    (/educator)    │
    └───────────────────┘      └───────────────────┘      └───────────────────┘
 ```
 
-### 1. Dyslexic & Neurodivergent Students
+### 1. Dyslexic & Neurodivergent Students (`/dashboard`)
 * **Tone:** Warm, encouraging, playful, and low-stress.
-* **Experience:** Access to specialized typefaces (like **OpenDyslexic**), custom character/word spacing, an interactive highlight ruler, and bimodal dictation utilities to eliminate spelling anxiety.
+* **Experience:** Access to specialized typography controls, bimodal Text-to-Speech & Speech-to-Text dictation assistance, sentence frames, interactive syllabic breakdowns, and collaborative matching quizzes without stress-inducing timers.
 
-### 2. Parents & Guardians
+### 2. Parents & Guardians (`/parent`)
 * **Tone:** Supportive, reassuring, and highly informative.
-* **Experience:** Real-time visibility into their child's language gains. Features a dedicated parent analytics panel showing vocabulary growth, message volume, and customizable remote font/theme adjustments to co-configure their child's workspace.
+* **Experience:** Monitor child's confidence metrics, reading stamina, and vocabulary logs. Features parent-focused control switches to remotely customize default contrast themes, text scales, and vocal speech rates for their child's workspace.
 
-### 3. Special Education Needs (SEN) School Departments & Educators
-* **Tone:** Professional, data-driven, and highly compliant.
-* **Experience:** Classroom dashboards mapped directly to **IEP (Individualized Education Program)** targets. Educators can remotely toggle accommodation settings, log qualitative progress, and instantly export school-compliant progress portfolios.
-
-### 4. Accessibility Developers & Advocates
-* **Tone:** Clear, modular, and developer-friendly.
-* **Experience:** Clean, strongly-typed codebase featuring structured React Contexts, custom Web Speech hooks, semantic HTML layouts, and fully keyboard-navigable UI components.
+### 3. SEN School Departments & Educators (`/educator`)
+* **Tone:** Professional, data-driven, and compliant.
+* **Experience:** Access a classroom roster mapping student engagement against set **IEP (Individualized Education Program)** targets. Educators can remotely toggle accommodation settings, log qualitative progress, and export school-compliant progress portfolios.
 
 ---
 
 ## 🧩 Dyslexia-Friendly Design System
 
-Rather than tacking accessibility on as an afterthought, PenPal embeds visual and cognitive scaffolding directly into its CSS and component primitives.
+Rather than tacking accessibility on as an afterthought, PenPal embeds visual and cognitive scaffolding directly into its CSS variables and component primitives.
 
-### 🔠 Specialized Typography
-* **Dyslexia-Optimized Font-Face:** Dynamic typeface selector including **OpenDyslexic** (weighted baselines to prevent letter-flipping and rotation) and highly legible geometric sans-serif layouts.
-* **Interactive Spacing Controls:** Granular custom properties regulating letter-tracking, word-spacing, and line-height, designed specifically to reduce visual crowding effects.
+### 🔠 Specialized Typography & Spacing
+* **Dyslexia-Optimized Typeface:** Multi-option typeface selector including **OpenDyslexic** (uses weighted baselines to prevent letter-flipping and rotation), highly readable Sans-Serif, and Standard System interfaces.
+* **Interactive Spacing Controls:** Granular custom CSS properties regulating line height, letter spacing, and word spacing designed to dramatically reduce visual crowding.
 
-### 🎨 Visual Comfort & Contrast Control
-* **Irlen-Friendly Warm Pastel Backgrounds:** Choose from soft cream, pastel blue, pale mint green, or muted gray themes designed to eliminate harsh screen glare and help students focus.
+### 🎨 Visual Comfort & Anti-Glare Contrast
+* **Irlen-Friendly Warm Pastel Backgrounds:** Choose from soft cream, pastel blue, pale mint green, or muted gray themes designed to eliminate harsh screen glare and ease scotopic fatigue.
 * **Interactive Reading Ruler:** A customizable overlay focus strip that tracks vertical cursor movement, dimming the rest of the viewport to guide the reader's eyes smoothly across text lines.
-* **Distraction-Free Mode:** Instantly hides side navigation, decorative stats, and background elements, leaving only the primary core workspace visible to promote sustained attention.
+* **Distraction-Free Mode:** Instantly hides side navigation, decorative stats, and non-essential background elements, leaving only the primary core workspace visible to promote sustained attention.
 
 ### 🧠 Cognitive Scaffolding & Bimodal Design
 * **Bimodal Presentation:** Simultaneously displays written text and plays natural-tempo Spanish voice audio, helping map graphemes directly to phonemes.
@@ -112,31 +108,45 @@ Rather than tacking accessibility on as an afterthought, PenPal embeds visual an
 
 ---
 
-## 🛡️ Privacy & Mock Data Persistence
+## 🛡️ Global State, Privacy & Cross-Portal Synchronization
 
-To prioritize visual security and keep our application entirely self-contained, **PenPal utilizes local storage (`localStorage`)** to mock database persistence and maintain cross-role settings dynamically.
+To prioritize user privacy and ensure a completely self-contained demo environment, PenPal relies on reactive HTML5 `localStorage` as its local mock-database.
+
+The application utilizes key-value synchronizations to link learner achievements with supervisor dashboards instantly:
 
 ```
-                      ┌────────────────────────────────────────┐
-                      │          BROWSER LOCALSTORAGE          │
-                      └───────────────────┬────────────────────┘
-                                          │
-            ┌─────────────────────────────┼─────────────────────────────┐
-            ▼                             ▼                             ▼
-  ┌──────────────────┐          ┌──────────────────┐          ┌──────────────────┐
-  │  Learner Chat    │          │ Parent Remote    │          │  Classroom IEP   │
-  │  & Quiz Points   │          │ Accommodation    │          │  Progress Logs   │
-  └──────────────────┘          └──────────────────┘          └──────────────────┘
+┌────────────────────────────────────────────────────────────────────────┐
+│                          BROWSER LOCALSTORAGE                          │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+    ┌───────────────────────────────┼───────────────────────────────┐
+    ▼                               ▼                               ▼
+┌────────────────────────┐      ┌────────────────────────┐      ┌────────────────────────┐
+│ penpal_a11y_settings   │      │ penpal_messages        │      │ penpal_quiz_points     │
+│ - Global typography    │      │ - Chat logs between    │      │ - Dynamic tracking of  │
+│ - Spacing limits       │      │   learner and partner  │      │   cooperative quiz XP  │
+│ - Pastel active themes │      │   to mock P2P system   │      │   for parent portal    │
+└────────────────────────┘      └────────────────────────┘      └────────────────────────┘
+    ▲                               ▲                               ▲
+    │                               │                               │
+    └───────────────────────────────┼───────────────────────────────┘
+                                    ▼
+                        ┌────────────────────────┐
+                        │ penpal_messages_sent_  │
+                        │ count                  │
+                        │ - Mapped to classroom  │
+                        │   IEP goal markers     │
+                        └────────────────────────┘
 ```
 
-* **Learner Activity Integration:** Student interaction metrics (such as messages dispatched or cooperative quiz scores earned) are written directly to local keys like `penpal_messages_sent_count` and `penpal_quiz_points`.
-* **Cross-Role Synchronicity:** When a parent or educator remotely updates Alex's typography settings or visual contrast values in their respective portals, the changes write to our centralized React state context and synchronize instantly to the learner's dashboard interface.
+* **Central Accessibility Store (`penpal_a11y_settings`):** Houses visual configuration preferences. Adjusting font sizes, line heights, or color schemas in the parent portal `/parent` or educator console `/educator` writes directly to this key, triggering immediate, non-disruptive style changes across the child's `/dashboard`.
+* **State Syncing Hook:** The custom hooks and context reactively monitor local keys to propagate metrics and logs in real-time, offering a genuine simulated cross-device deployment scenario.
 
 ---
 
 ## 🛠️ Technical Architecture & Directory Structure
 
-PenPal is engineered to be modern, modular, and extensible. We leverage **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**.
+PenPal is engineered to be modern, modular, and extensible. We leverage **Next.js**, **React 18**, **TypeScript**, and **Tailwind CSS**.
 
 ### **Directory Blueprint**
 
@@ -242,12 +252,6 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
     </AccessibilityContext.Provider>
   );
 };
-
-export const useAccessibility = () => {
-  const context = useContext(AccessibilityContext);
-  if (!context) throw new Error('useAccessibility must be used within an AccessibilityProvider');
-  return context;
-};
 ```
 
 ### 2. Low-Latency Web Speech Wrapper (`useSpeech.ts`)
@@ -308,9 +312,9 @@ export const useSpeech = () => {
 
 ---
 
-## ⚙️ Local Installation & Environment Setup
+## ⚙️ Local Installation & Quality Assurance
 
-Follow these straightforward steps to boot up PenPal locally on your machine.
+Follow these straightforward steps to boot up PenPal locally on your machine and run validation tests.
 
 ### Prerequisites
 * **Node.js** (v18.x or later recommended)
@@ -333,7 +337,14 @@ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) inside your web browser to interact with the application.
 
-### 4. Build and Compile for Production
+### 4. Code Quality & Formatting Audits
+Run Next.js default linting scripts to verify compliance with recommended ECMAScript and React guidelines:
+```bash
+npm run lint
+```
+
+### 5. Compile and Validate Production Builds
+To test production bundling and confirm there are no static type errors:
 ```bash
 npm run build
 ```
