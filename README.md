@@ -1,10 +1,10 @@
 # PenPal 🎨✍️
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Next.js-14.2-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-18.3-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-5.3-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-blueviolet?style=for-the-badge" alt="WCAG 2.1 AA Compliant" />
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License MIT" />
 </p>
@@ -17,13 +17,15 @@
 
 ## 📖 Table of Contents
 - [🌟 Problem Statement & Vision](#-problem-statement--vision)
-- [👥 Target Audiences & Brand Identity](#-target-audiences--brand-identity)
+- [👥 Target Audiences & Portal Breakdown](#-target-audiences--portal-breakdown)
+  - [1. Learner Dashboard (`/dashboard`)](#1-learner-dashboard-dashboard)
+  - [2. Parent Progress Portal (`/parent`)](#2-parent-progress-portal-parent)
+  - [3. SEN Educator Desk (`/educator`)](#3-sen-educator-desk-educator)
 - [🧩 Dyslexia-Friendly Design System](#-dyslexia-friendly-design-system)
-- [🚀 Key Core Features](#-key-core-features)
-- [🛡️ Privacy & Mock Data Persistence](#️-privacy--mock-data-persistence)
-- [🛠️ Technical Architecture & Directory Structure](#️-technical-architecture--directory-structure)
-- [💻 Deep Dive Developer Implementation Examples](#-deep-dive-developer-implementation-examples)
-- [⚙️ Local Installation & Environment Setup](#️-local-installation--environment-setup)
+- [🛡️ State Management & Local Storage Persistence](#️-state-management--local-storage-persistence)
+- [🛠️ Technical Architecture & Directory Blueprint](#️-technical-architecture--directory-blueprint)
+- [💻 Developer Code Snippets](#-developer-code-snippets)
+- [⚙️ Local Installation & Development Setup](#️-local-installation--development-setup)
 - [🤝 Contribution Guidelines](#-contribution-guidelines)
 - [📄 License](#-license)
 
@@ -37,203 +39,149 @@ Traditional language learning applications rely heavily on dense text walls, rap
 
 ---
 
-## 👥 Target Audiences & Brand Identity
+## 👥 Target Audiences & Portal Breakdown
 
-Our branding and feature sets are carefully tailored to support four primary user categories:
+PenPal provides dedicated portals tailored to three core user roles:
 
 ```
-                          ┌───────────────────────────┐
-                          │   PENPAL DOCKING STATION  │
-                          └─────────────┬─────────────┘
-                                        │
-             ┌──────────────────────────┼──────────────────────────┐
-             ▼                          ▼                          ▼
-   ┌───────────────────┐      ┌───────────────────┐      ┌───────────────────┐
-   │ Dyslexic Learner  │      │ Parents/Guardians │      │ SEN Departments   │
-   │  (Interactive)    │      │  (Insight & Care) │      │  (IEP Management) │
-   └───────────────────┘      └───────────────────┘      └───────────────────┘
+                            ┌───────────────────────────┐
+                            │     PENPAL PORTAL HUB     │
+                            └─────────────┬─────────────┘
+                                          │
+             ┌────────────────────────────┼────────────────────────────┐
+             ▼                            ▼                            ▼
+   ┌───────────────────┐        ┌───────────────────┐        ┌───────────────────┐
+   │ Dyslexic Learner  │        │ Parent / Guardian │        │ SEN Educator Desk │
+   │   `/dashboard`    │        │     `/parent`     │        │    `/educator`    │
+   └───────────────────┘        └───────────────────┘        └───────────────────┘
 ```
 
-### 1. Dyslexic & Neurodivergent Students
+### 1. Learner Dashboard (`/dashboard`)
 * **Tone:** Warm, encouraging, playful, and low-stress.
-* **Experience:** Access to specialized typefaces (like **OpenDyslexic**), custom character/word spacing, an interactive highlight ruler, and bimodal dictation utilities to eliminate spelling anxiety.
+* **Peer-to-Peer PenPal Exchange:** Vetted asynchronous chat with international penpals (e.g., *Mateo from Madrid*). Includes structured conversation frames and translation assists.
+* **Interactive Syllable & Phonetic Breakdown:** Clicking any word in the chat reveals a color-coded syllable breakdown, phonetic transcriptions, and localized translation (e.g., **fút · bol** in rose/emerald blocks).
+* **Cooperative Quizzes:** Stress-free matching activities solved with partner dialogue hints instead of competitive pressure timers.
+* **Bimodal Dictation & Speech Support:** Built-in Web Speech API integration allowing dual Text-to-Speech playback and Speech-to-Text dictation.
 
-### 2. Parents & Guardians
-* **Tone:** Supportive, reassuring, and highly informative.
-* **Experience:** Real-time visibility into their child's language gains. Features a dedicated parent analytics panel showing vocabulary growth, message volume, and customizable remote font/theme adjustments to co-configure their child's workspace.
+### 2. Parent Progress Portal (`/parent`)
+* **Tone:** Reassuring, clear, and informative.
+* **Confidence Metrics Tracker:** Visual summary of the child's reading stamina, writing autonomy, message activity, and vocabulary growth.
+* **Parental Override Controls:** Parents can remotely adjust visual and typography settings (font family, font size, letter spacing, word spacing, line height, theme contrast, and reading ruler height) to align with their child's needs.
+* **IEP Progress Exporting:** One-click generation of qualitative progress logs for clinical teams and school staff.
 
-### 3. Special Education Needs (SEN) School Departments & Educators
+### 3. SEN Educator Desk (`/educator`)
 * **Tone:** Professional, data-driven, and highly compliant.
-* **Experience:** Classroom dashboards mapped directly to **IEP (Individualized Education Program)** targets. Educators can remotely toggle accommodation settings, log qualitative progress, and instantly export school-compliant progress portfolios.
-
-### 4. Accessibility Developers & Advocates
-* **Tone:** Clear, modular, and developer-friendly.
-* **Experience:** Clean, strongly-typed codebase featuring structured React Contexts, custom Web Speech hooks, semantic HTML layouts, and fully keyboard-navigable UI components.
+* **Classroom Roster Analytics:** Real-time visibility into student performance, total messages sent, and learned vocabulary count.
+* **IEP Goal Integration:** Direct mapping of learner milestones to formal Individualized Education Program (IEP) targets.
+* **Remote Accommodation Overrides:** Educators can update accommodation settings across student profiles on the fly.
 
 ---
 
 ## 🧩 Dyslexia-Friendly Design System
 
-Rather than tacking accessibility on as an afterthought, PenPal embeds visual and cognitive scaffolding directly into its CSS and component primitives.
+PenPal embeds visual and cognitive scaffolding directly into its styling and component primitives:
 
 ### 🔠 Specialized Typography
-* **Dyslexia-Optimized Font-Face:** Dynamic typeface selector including **OpenDyslexic** (weighted baselines to prevent letter-flipping and rotation) and highly legible geometric sans-serif layouts.
-* **Interactive Spacing Controls:** Granular custom properties regulating letter-tracking, word-spacing, and line-height, designed specifically to reduce visual crowding effects.
+* **Dyslexia-Optimized Fonts:** Select between **OpenDyslexic** (weighted baselines to prevent letter-flipping), clean sans-serif (Arial), or standard system fonts.
+* **Granular Spacing Controls:** Adjust letter-spacing, word-spacing, line-height, and font-size multiplier dynamically to eliminate visual crowding.
 
-### 🎨 Visual Comfort & Contrast Control
-* **Irlen-Friendly Warm Pastel Backgrounds:** Choose from soft cream, pastel blue, pale mint green, or muted gray themes designed to eliminate harsh screen glare and help students focus.
-* **Interactive Reading Ruler:** A customizable overlay focus strip that tracks vertical cursor movement, dimming the rest of the viewport to guide the reader's eyes smoothly across text lines.
-* **Distraction-Free Mode:** Instantly hides side navigation, decorative stats, and background elements, leaving only the primary core workspace visible to promote sustained attention.
-
-### 🧠 Cognitive Scaffolding & Bimodal Design
-* **Bimodal Presentation:** Simultaneously displays written text and plays natural-tempo Spanish voice audio, helping map graphemes directly to phonemes.
-* **No-Stress Timers:** Replaces countdown clocks and competitive pressure with structured, asynchronous communication prompts, encouraging self-paced comprehension.
+### 🎨 Visual Comfort & Anti-Glare Themes
+* **Irlen-Friendly Color Overlays:** Choose from soft cream (`#FCF9F2`), pastel blue (`#EBF4F6`), pastel green (`#F1F7ED`), or high-contrast dark theme (`#0D0D0D`).
+* **Interactive Reading Ruler:** Focus strip tracking mouse position vertically to dim surrounding text lines, guiding eye movements smoothly.
+* **Distraction-Free Mode:** Hides non-essential UI elements to keep focus on the core activity workspace.
 
 ---
 
-## 🚀 Key Core Features
+## 🛡️ State Management & Local Storage Persistence
 
-### 1. Interactive Learner Dashboard (`/dashboard`)
-* **Peer-to-Peer PenPal Matching:** Vetted matching with international partners (such as *Mateo from Madrid*). Includes structured conversation frames and translation assists.
-* **Word Breakdown Tooltip Desk:** Clicking any word in the chat immediately reveals a color-coded syllable breakdown, phonetic transcriptions, and localized translation.
-* **Syllable Color Scaffolding:** Visually separates syllables in alternating colors (e.g., **fút · bol** in rose/emerald blocks) to make pronunciation patterns intuitive.
-* **Asynchronous Writing Scaffolds:** Expandable writing helpers featuring Spanish sentence frames (e.g., *"Me gusta mucho..."*) and interactive vocabulary suggestion chips.
-* **Cooperative Quizzes:** Stress-free, collaborative matching activities solved with partner dialogue hints instead of competitive timers.
+PenPal is completely client-side and self-contained, using browser `localStorage` to persist user data and synchronize state across the three role portals:
 
-### 2. Parent Progress & Insights Board (`/parent`)
-* **Confidence Metrics Tracker:** Visual summary of the child's reading stamina, writing autonomy, and vocabulary acquisition.
-* **Parental Override Controls:** Parents can remotely customize default contrast themes, text-scaling, and vocal playback speeds to align with their child's daily stamina.
-* **Portfolio Exporter:** One-click generation of progress reports to share with clinical teams or educators.
-
-### 3. SEN Educator & Administration Desk (`/educator`)
-* **Classroom Roster Analytics:** Real-time visibility of student progression against set targets.
-* **IEP Goal Integration:** Direct mapping of application milestones (e.g., messages sent, reading ruler usage) to formal IEP objectives.
-* **Accommodation Override Controls:** Remotely adjust student font profiles, zoom scales, or default high-contrast layouts.
+| Storage Key | Description |
+| :--- | :--- |
+| `penpal_a11y_settings` | Stores global typography, spacing, theme, reading ruler, and speech configurations. |
+| `penpal_messages` | Persists conversation history between the learner and penpal. |
+| `penpal_messages_sent_count` | Tracks total number of messages dispatched by the student. |
+| `penpal_quiz_points` | Stores points earned in cooperative learning activities. |
+| `penpal_learned_vocab` | List of words unlocked and practiced by the learner. |
 
 ---
 
-## 🛡️ Privacy & Mock Data Persistence
+## 🛠️ Technical Architecture & Directory Blueprint
 
-To prioritize visual security and keep our application entirely self-contained, **PenPal utilizes local storage (`localStorage`)** to mock database persistence and maintain cross-role settings dynamically.
-
-```
-                      ┌────────────────────────────────────────┐
-                      │          BROWSER LOCALSTORAGE          │
-                      └───────────────────┬────────────────────┘
-                                          │
-            ┌─────────────────────────────┼─────────────────────────────┐
-            ▼                             ▼                             ▼
-  ┌──────────────────┐          ┌──────────────────┐          ┌──────────────────┐
-  │  Learner Chat    │          │ Parent Remote    │          │  Classroom IEP   │
-  │  & Quiz Points   │          │ Accommodation    │          │  Progress Logs   │
-  └──────────────────┘          └──────────────────┘          └──────────────────┘
-```
-
-* **Learner Activity Integration:** Student interaction metrics (such as messages dispatched or cooperative quiz scores earned) are written directly to local keys like `penpal_messages_sent_count` and `penpal_quiz_points`.
-* **Cross-Role Synchronicity:** When a parent or educator remotely updates Alex's typography settings or visual contrast values in their respective portals, the changes write to our centralized React state context and synchronize instantly to the learner's dashboard interface.
-
----
-
-## 🛠️ Technical Architecture & Directory Structure
-
-PenPal is engineered to be modern, modular, and extensible. We leverage **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**.
-
-### **Directory Blueprint**
+PenPal is built with **Next.js 14** (App Router), **React 18**, **TypeScript**, and **Tailwind CSS**.
 
 ```
-/
-├── public/                 # Static assets (accessibility fonts, system vector icons)
+penpal/
+├── public/                     # Public assets (e.g. OpenDyslexic font files)
 ├── src/
-│   ├── app/                # Next.js App Router Pages and Layouts
-│   │   ├── layout.tsx      # Base HTML configuration with Accessibility Provider wraps
-│   │   ├── page.tsx        # Homepage introducing Simulation Role Selector
-│   │   ├── dashboard/      # Interactive Dyslexic Learner Workspace
-│   │   ├── educator/       # SEN & Classroom Educator Dashboard
-│   │   └── parent/         # Parent Progress & Remote Setup Portal
-│   ├── components/         # Shared Reusable UI Primitives
-│   │   ├── a11y/           # Reading Ruler and Color Overlay Widgets
-│   │   └── NavigationHeader.tsx # Universal role selection bar
-│   ├── context/            # React Global State and Accessibility Contexts
-│   │   ├── AccessibilityContext.tsx # Central store managing contrast, fonts, and zoom
-│   │   └── AuthContext.tsx          # Mock user role authorization
-│   ├── hooks/              # Custom React Hooks
-│   │   ├── useSpeech.ts    # Audio wrapper using browser Web Speech API
-│   │   └── useMatch.ts     # P2P message state machine & mock chat generator
-│   └── styles/             # Global Configurations
-│       └── globals.css     # CSS Custom properties for typography & padding
-├── LICENSE                 # MIT License Document
-├── package.json            # Node dependencies & project scripts
-└── README.md               # Developer documentation & onboarding guide
+│   ├── app/                    # Next.js App Router Pages
+│   │   ├── layout.tsx          # Root layout wrapped with AccessibilityProvider
+│   │   ├── page.tsx            # Role selector landing page
+│   │   ├── dashboard/          # Learner interactive workspace
+│   │   ├── educator/           # SEN Educator dashboard
+│   │   └── parent/             # Parent monitoring & remote setup portal
+│   ├── components/             # Reusable UI components
+│   │   ├── a11y/               # ReadingRuler accessibility widget
+│   │   └── NavigationHeader.tsx# Role navigation & accessibility toolbar
+│   ├── context/                # Global React Contexts
+│   │   ├── AccessibilityContext.tsx # Central context managing contrast, typography, & ruler
+│   │   └── AuthContext.tsx     # Role management context (Learner, Parent, Educator)
+│   ├── hooks/                  # Custom React Hooks
+│   │   ├── useSpeech.ts        # Browser Web Speech API hook (Speech Synthesis & Recognition)
+│   │   └── useMatch.ts         # PenPal chat state machine & automated responder
+│   └── styles/                 # Global styles
+│       └── globals.css         # CSS custom properties and baseline styles
+├── LICENSE                     # MIT License
+├── package.json                # Project dependencies and npm scripts
+├── postcss.config.js           # PostCSS configuration
+├── tailwind.config.js          # Tailwind CSS design system configuration
+└── tsconfig.json               # TypeScript configuration
 ```
 
 ---
 
-## 💻 Deep Dive Developer Implementation Examples
+## 💻 Developer Code Snippets
 
-### 1. Dynamic Accessibility Context Provider (`AccessibilityContext.tsx`)
-This context provider orchestrates visual variables across the entire application viewport, dynamically mapping user overrides onto root custom CSS variables.
+### 1. Dynamic Accessibility Context (`src/context/AccessibilityContext.tsx`)
 
 ```typescript
-import React, { createContext, useContext, useState, useEffect } from 'react';
+"use client";
 
-export type DyslexiaFont = 'open-dyslexic' | 'sans-serif' | 'standard';
-export type ThemeColor = 'default-cream' | 'pastel-blue' | 'pastel-green' | 'high-contrast';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-interface AccessibilitySettings {
+export type DyslexiaFont = "open-dyslexic" | "sans-serif" | "standard";
+export type ThemeColor = "default-cream" | "pastel-blue" | "pastel-green" | "high-contrast";
+
+export interface AccessibilitySettings {
   fontFamily: DyslexiaFont;
   lineHeight: number;
   letterSpacing: number;
-  themeColor: ThemeColor;
+  wordSpacing: number;
   fontSizeMultiplier: number;
+  themeColor: ThemeColor;
   readingRulerEnabled: boolean;
+  readingRulerHeight: number;
   speechSpeed: number;
   distractionFree: boolean;
-  setSettings: React.Dispatch<React.SetStateAction<AccessibilitySettings>>;
 }
 
-const AccessibilityContext = createContext<AccessibilitySettings | undefined>(undefined);
-
 export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [settings, setSettings] = useState<AccessibilitySettings>({
-    fontFamily: 'open-dyslexic',
-    lineHeight: 1.8,
-    letterSpacing: 2.0,
-    themeColor: 'default-cream',
-    fontSizeMultiplier: 1.15,
-    readingRulerEnabled: false,
-    speechSpeed: 0.85,
-    distractionFree: false,
-    setSettings: () => {},
-  });
+  const [settings, setSettings] = useState<AccessibilitySettings>(defaultSettings);
 
   useEffect(() => {
+    const saved = localStorage.getItem("penpal_a11y_settings");
+    if (saved) {
+      try { setSettings(JSON.parse(saved)); } catch (e) { /* handle error */ }
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("penpal_a11y_settings", JSON.stringify(settings));
     const root = document.documentElement;
-
-    // Dynamically update CSS custom properties on the DOM root
-    const fontMapping = {
-      'open-dyslexic': 'OpenDyslexic, "Comic Sans MS", Chalkboard SE, sans-serif',
-      'sans-serif': 'Arial, sans-serif',
-      'standard': 'system-ui, -apple-system, sans-serif'
-    };
-
-    const bgColors = {
-      'default-cream': '#FCF9F2',
-      'pastel-blue': '#EBF4F6',
-      'pastel-green': '#F1F7ED',
-      'high-contrast': '#0F172A'
-    };
-
-    const textColors = {
-      'default-cream': '#2D2A24',
-      'pastel-blue': '#1E293B',
-      'pastel-green': '#1C2E1A',
-      'high-contrast': '#F8FAFC'
-    };
-
-    root.style.setProperty('--font-family-current', fontMapping[settings.fontFamily]);
-    root.style.setProperty('--theme-bg-color', bgColors[settings.themeColor]);
-    root.style.setProperty('--theme-text-color', textColors[settings.themeColor]);
-    root.style.setProperty('--font-size-multiplier', `${settings.fontSizeMultiplier}`);
+    // Apply CSS variables dynamically to the document root
+    root.style.setProperty("--line-height-current", `${settings.lineHeight}`);
+    root.style.setProperty("--letter-spacing-current", `${settings.letterSpacing}px`);
+    root.style.setProperty("--word-spacing-current", `${settings.wordSpacing}px`);
   }, [settings]);
 
   return (
@@ -242,121 +190,92 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
     </AccessibilityContext.Provider>
   );
 };
-
-export const useAccessibility = () => {
-  const context = useContext(AccessibilityContext);
-  if (!context) throw new Error('useAccessibility must be used within an AccessibilityProvider');
-  return context;
-};
 ```
 
-### 2. Low-Latency Web Speech Wrapper (`useSpeech.ts`)
-This React hook abstracts browser voice synthesis and recognition, enabling low-stress, real-time auditory bimodal assistance.
+### 2. Speech Synthesis & Dictation Hook (`src/hooks/useSpeech.ts`)
 
 ```typescript
-import { useState, useCallback } from 'react';
+"use client";
+
+import { useState, useCallback } from "react";
+import { useAccessibility } from "@/context/AccessibilityContext";
 
 export const useSpeech = () => {
+  const { speechSpeed } = useAccessibility();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isListening, setIsListening] = useState(false);
 
-  const speak = useCallback((text: string, lang = 'es-ES', speed = 0.85) => {
-    if (typeof window === 'undefined' || !window.speechSynthesis) return;
-
-    window.speechSynthesis.cancel(); // Terminate pending audio streams
+  const speak = useCallback((text: string, lang = "es-ES") => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = lang;
-    utterance.rate = speed; // Slower pace tailored for phonetic processing
+    utterance.rate = speechSpeed;
 
     utterance.onstart = () => setIsPlaying(true);
     utterance.onend = () => setIsPlaying(false);
     utterance.onerror = () => setIsPlaying(false);
 
     window.speechSynthesis.speak(utterance);
-  }, []);
+  }, [speechSpeed]);
 
-  const startListening = useCallback((onResult: (transcript: string) => void) => {
-    if (typeof window === 'undefined') return;
-
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      alert("Voice speech recognition is not supported in this browser version. We recommend Google Chrome.");
-      return;
-    }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'es-ES';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    recognition.onstart = () => setIsListening(true);
-    recognition.onend = () => setIsListening(false);
-    recognition.onerror = () => setIsListening(false);
-
-    recognition.onresult = (event: any) => {
-      const resultText = event.results[0][0].transcript;
-      onResult(resultText);
-    };
-
-    recognition.start();
-  }, []);
-
-  return { speak, startListening, isPlaying, isListening };
+  return { speak, isPlaying, isListening };
 };
 ```
 
 ---
 
-## ⚙️ Local Installation & Environment Setup
-
-Follow these straightforward steps to boot up PenPal locally on your machine.
+## ⚙️ Local Installation & Development Setup
 
 ### Prerequisites
-* **Node.js** (v18.x or later recommended)
-* **npm** or **yarn** package manager
+* **Node.js** (v18.x or later)
+* **npm** (v9.x or later)
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/FolatheDuckofDuckingburg/PenPal.git
-cd PenPal
-```
+### Steps
 
-### 2. Install Project Dependencies
-```bash
-npm install
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/FolatheDuckofDuckingburg/PenPal.git
+   cd PenPal
+   ```
 
-### 3. Start Local Development Server
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) inside your web browser to interact with the application.
+2. **Install project dependencies:**
+   ```bash
+   npm install
+   ```
 
-### 4. Build and Compile for Production
-```bash
-npm run build
-```
+3. **Start the local development server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+4. **Build and lint:**
+   ```bash
+   npm run build
+   npm run lint
+   ```
 
 ---
 
 ## 🤝 Contribution Guidelines
 
-We warmly welcome contributions from developers, accessibility researchers, designers, and educators!
+We welcome contributions from developers, educators, accessibility experts, and designers!
 
-1. **Fork the Repo** and create a descriptively named feature branch (`feature/reading-ruler-improvements`).
-2. **Commit with Intention:** Write clear, informative commit messages explaining your modifications.
-3. **Keep Code Accessible:** All modified or newly added modules must align with WCAG 2.1 AA design patterns, incorporate descriptive semantic `aria-*` markers, and support 100% keyboard-navigable operations.
-4. **Submit a Pull Request:** Outline your changes clearly, linking any related issues and, where possible, attaching screenshots or screen recordings showing visual accessibility features in action.
+1. **Fork the Repository** and create a feature branch (`git checkout -b feature/accessible-feature`).
+2. **Adhere to Accessibility Guidelines:** Ensure all new components follow WCAG 2.1 AA standards, include appropriate `aria-*` tags, and maintain keyboard accessibility.
+3. **Commit & Push:** Submit clear, concise commits.
+4. **Open a Pull Request:** Describe the changes made and link relevant issues.
 
 ---
 
 ## 📄 License
 
-This software is open-source, licensed under the terms of the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
 <p align="center">
-  Made with 💙 and ☕ — Bridging communication gaps, one inclusive letter at a time.
+  Made with 💙 — Bridging communication gaps, one inclusive letter at a time.
 </p>
