@@ -19,10 +19,10 @@
 - [🌟 Problem Statement & Vision](#-problem-statement--vision)
 - [👥 Target Audiences & Brand Identity](#-target-audiences--brand-identity)
 - [🧩 Dyslexia-Friendly Design System](#-dyslexia-friendly-design-system)
-- [🚀 Key Core Features](#-key-core-features)
-- [🛡️ Privacy & Mock Data Persistence](#️-privacy--mock-data-persistence)
+- [🚀 Key Core Features & Portals](#-key-core-features--portals)
+- [🛡️ Privacy & LocalStorage State Architecture](#️-privacy--localstorage-state-architecture)
 - [🛠️ Technical Architecture & Directory Structure](#️-technical-architecture--directory-structure)
-- [💻 Deep Dive Developer Implementation Examples](#-deep-dive-developer-implementation-examples)
+- [💻 Developer Implementation Examples](#-developer-implementation-examples)
 - [⚙️ Local Installation & Environment Setup](#️-local-installation--environment-setup)
 - [🤝 Contribution Guidelines](#-contribution-guidelines)
 - [📄 License](#-license)
@@ -56,7 +56,7 @@ Our branding and feature sets are carefully tailored to support four primary use
 
 ### 1. Dyslexic & Neurodivergent Students
 * **Tone:** Warm, encouraging, playful, and low-stress.
-* **Experience:** Access to specialized typefaces (like **OpenDyslexic**), custom character/word spacing, an interactive highlight ruler, and bimodal dictation utilities to eliminate spelling anxiety.
+* **Experience:** Access to specialized typefaces (like **OpenDyslexic**), custom letter tracking, word spacing, and line height controls, an interactive reading ruler overlay, and bimodal speech utilities to eliminate spelling anxiety.
 
 ### 2. Parents & Guardians
 * **Tone:** Supportive, reassuring, and highly informative.
@@ -68,7 +68,7 @@ Our branding and feature sets are carefully tailored to support four primary use
 
 ### 4. Accessibility Developers & Advocates
 * **Tone:** Clear, modular, and developer-friendly.
-* **Experience:** Clean, strongly-typed codebase featuring structured React Contexts, custom Web Speech hooks, semantic HTML layouts, and fully keyboard-navigable UI components.
+* **Experience:** Clean, strongly-typed Next.js & TypeScript codebase featuring structured React Contexts, custom Web Speech hooks, semantic HTML layouts, and fully keyboard-navigable UI components.
 
 ---
 
@@ -76,22 +76,23 @@ Our branding and feature sets are carefully tailored to support four primary use
 
 Rather than tacking accessibility on as an afterthought, PenPal embeds visual and cognitive scaffolding directly into its CSS and component primitives.
 
-### 🔠 Specialized Typography
-* **Dyslexia-Optimized Font-Face:** Dynamic typeface selector including **OpenDyslexic** (weighted baselines to prevent letter-flipping and rotation) and highly legible geometric sans-serif layouts.
-* **Interactive Spacing Controls:** Granular custom properties regulating letter-tracking, word-spacing, and line-height, designed specifically to reduce visual crowding effects.
+### 🔠 Specialized Typography & Spacing
+* **Dyslexia-Optimized Font-Face:** Dynamic typeface selector including **OpenDyslexic** (weighted baselines to prevent letter-flipping and rotation), clean sans-serif (Arial/Helvetica), and standard system typography.
+* **Interactive Spacing Controls:** Granular custom CSS variables regulating letter-tracking (`letterSpacing`), word-spacing (`wordSpacing`), and line-height (`lineHeight`), designed specifically to reduce visual crowding effects.
+* **Font-Scale Multiplier:** Dynamic root font sizing (`fontSizeMultiplier`) scaling all viewport text seamlessly.
 
 ### 🎨 Visual Comfort & Contrast Control
-* **Irlen-Friendly Warm Pastel Backgrounds:** Choose from soft cream, pastel blue, pale mint green, or muted gray themes designed to eliminate harsh screen glare and help students focus.
-* **Interactive Reading Ruler:** A customizable overlay focus strip that tracks vertical cursor movement, dimming the rest of the viewport to guide the reader's eyes smoothly across text lines.
+* **Irlen-Friendly Warm Anti-Glare Themes:** Choose from soft cream (`#FCF9F2`), pastel blue (`#EBF4F6`), pastel leaf green (`#F1F7ED`), or high-contrast dark theme (`#0D0D0D`) designed to eliminate harsh screen glare and reduce visual fatigue.
+* **Interactive Reading Ruler:** A customizable overlay focus strip with adjustable height (`readingRulerHeight`) that tracks vertical cursor movement, dimming the upper and lower viewports to guide the reader's eyes smoothly across text lines.
 * **Distraction-Free Mode:** Instantly hides side navigation, decorative stats, and background elements, leaving only the primary core workspace visible to promote sustained attention.
 
 ### 🧠 Cognitive Scaffolding & Bimodal Design
-* **Bimodal Presentation:** Simultaneously displays written text and plays natural-tempo Spanish voice audio, helping map graphemes directly to phonemes.
+* **Bimodal Presentation:** Simultaneously displays written text and plays natural-tempo Spanish audio with adjustable speech rate (`speechSpeed`), helping map graphemes directly to phonemes.
 * **No-Stress Timers:** Replaces countdown clocks and competitive pressure with structured, asynchronous communication prompts, encouraging self-paced comprehension.
 
 ---
 
-## 🚀 Key Core Features
+## 🚀 Key Core Features & Portals
 
 ### 1. Interactive Learner Dashboard (`/dashboard`)
 * **Peer-to-Peer PenPal Matching:** Vetted matching with international partners (such as *Mateo from Madrid*). Includes structured conversation frames and translation assists.
@@ -102,7 +103,7 @@ Rather than tacking accessibility on as an afterthought, PenPal embeds visual an
 
 ### 2. Parent Progress & Insights Board (`/parent`)
 * **Confidence Metrics Tracker:** Visual summary of the child's reading stamina, writing autonomy, and vocabulary acquisition.
-* **Parental Override Controls:** Parents can remotely customize default contrast themes, text-scaling, and vocal playback speeds to align with their child's daily stamina.
+* **Parental Override Controls:** Parents can remotely customize default contrast themes, typography spacing, and vocal playback speeds to align with their child's daily stamina.
 * **Portfolio Exporter:** One-click generation of progress reports to share with clinical teams or educators.
 
 ### 3. SEN Educator & Administration Desk (`/educator`)
@@ -112,197 +113,232 @@ Rather than tacking accessibility on as an afterthought, PenPal embeds visual an
 
 ---
 
-## 🛡️ Privacy & Mock Data Persistence
+## 🛡️ Privacy & LocalStorage State Architecture
 
-To prioritize visual security and keep our application entirely self-contained, **PenPal utilizes local storage (`localStorage`)** to mock database persistence and maintain cross-role settings dynamically.
+To prioritize visual security and keep our application entirely self-contained, **PenPal utilizes browser `localStorage`** to mock database persistence and maintain cross-role settings dynamically across client portals.
 
 ```
                       ┌────────────────────────────────────────┐
                       │          BROWSER LOCALSTORAGE          │
                       └───────────────────┬────────────────────┘
                                           │
-            ┌─────────────────────────────┼─────────────────────────────┐
-            ▼                             ▼                             ▼
-  ┌──────────────────┐          ┌──────────────────┐          ┌──────────────────┐
-  │  Learner Chat    │          │ Parent Remote    │          │  Classroom IEP   │
-  │  & Quiz Points   │          │ Accommodation    │          │  Progress Logs   │
-  └──────────────────┘          └──────────────────┘          └──────────────────┘
+      ┌───────────────────────┬───────────┴───────────┬───────────────────────┐
+      ▼                       ▼                       ▼                       ▼
+┌──────────────┐      ┌──────────────┐        ┌──────────────┐        ┌──────────────┐
+│  a11y Settings│     │  Messages    │        │  Sent Count  │        │ Quiz Points  │
+└──────────────┘      └──────────────┘        └──────────────┘        └──────────────┘
 ```
 
-* **Learner Activity Integration:** Student interaction metrics (such as messages dispatched or cooperative quiz scores earned) are written directly to local keys like `penpal_messages_sent_count` and `penpal_quiz_points`.
-* **Cross-Role Synchronicity:** When a parent or educator remotely updates Alex's typography settings or visual contrast values in their respective portals, the changes write to our centralized React state context and synchronize instantly to the learner's dashboard interface.
+### Key LocalStorage Schema Keys
+* `penpal_a11y_settings`: Stores visual configurations (`fontFamily`, `lineHeight`, `letterSpacing`, `wordSpacing`, `fontSizeMultiplier`, `themeColor`, `readingRulerEnabled`, `readingRulerHeight`, `speechSpeed`, `distractionFree`).
+* `penpal_messages`: Array of active P2P message thread items exchanged between learners.
+* `penpal_messages_sent_count`: Numeric counter tracking total messages dispatched by the student.
+* `penpal_quiz_points`: Numeric tally of points earned in cooperative, timer-free quizzes.
+* `penpal_learned_vocab`: Array of vocabulary words mastered during interactive sessions.
 
 ---
 
 ## 🛠️ Technical Architecture & Directory Structure
 
-PenPal is engineered to be modern, modular, and extensible. We leverage **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**.
+PenPal is engineered with Next.js App Router, React, TypeScript, and Tailwind CSS.
 
 ### **Directory Blueprint**
 
 ```
-/
-├── public/                 # Static assets (accessibility fonts, system vector icons)
+.
 ├── src/
 │   ├── app/                # Next.js App Router Pages and Layouts
-│   │   ├── layout.tsx      # Base HTML configuration with Accessibility Provider wraps
-│   │   ├── page.tsx        # Homepage introducing Simulation Role Selector
-│   │   ├── dashboard/      # Interactive Dyslexic Learner Workspace
-│   │   ├── educator/       # SEN & Classroom Educator Dashboard
-│   │   └── parent/         # Parent Progress & Remote Setup Portal
-│   ├── components/         # Shared Reusable UI Primitives
-│   │   ├── a11y/           # Reading Ruler and Color Overlay Widgets
-│   │   └── NavigationHeader.tsx # Universal role selection bar
-│   ├── context/            # React Global State and Accessibility Contexts
-│   │   ├── AccessibilityContext.tsx # Central store managing contrast, fonts, and zoom
-│   │   └── AuthContext.tsx          # Mock user role authorization
+│   │   ├── layout.tsx      # Base HTML layout wrapped with Accessibility & Auth Providers
+│   │   ├── page.tsx        # Landing homepage introducing Role Selector & Feature Grid
+│   │   ├── dashboard/      # Interactive Dyslexic Learner Portal
+│   │   ├── educator/       # SEN & Classroom Educator Portal
+│   │   └── parent/         # Parent Progress & Remote Accommodation Portal
+│   ├── components/         # Shared Reusable UI Components
+│   │   ├── a11y/           # Reading Ruler and Accessibility Settings Widget
+│   │   │   ├── A11yWidget.tsx
+│   │   │   └── ReadingRuler.tsx
+│   │   └── NavigationHeader.tsx # Universal role navigation header bar
+│   ├── context/            # Global React Context State Stores
+│   │   ├── AccessibilityContext.tsx # Central store managing contrast, typography, and ruler settings
+│   │   └── AuthContext.tsx          # Mock user role authorization context
 │   ├── hooks/              # Custom React Hooks
-│   │   ├── useSpeech.ts    # Audio wrapper using browser Web Speech API
-│   │   └── useMatch.ts     # P2P message state machine & mock chat generator
-│   └── styles/             # Global Configurations
-│       └── globals.css     # CSS Custom properties for typography & padding
+│   │   ├── useSpeech.ts    # Web Speech API wrapper for Text-to-Speech & Speech-to-Text
+│   │   └── useMatch.ts     # PenPal message thread state machine & mock chat generator
+│   └── styles/             # Global Styling Rules
+│       └── globals.css     # CSS custom properties and typography root variables
 ├── LICENSE                 # MIT License Document
 ├── package.json            # Node dependencies & project scripts
+├── postcss.config.js       # PostCSS configuration
+├── tailwind.config.js      # Tailwind CSS configuration
+├── tsconfig.json           # TypeScript configuration
 └── README.md               # Developer documentation & onboarding guide
 ```
 
 ---
 
-## 💻 Deep Dive Developer Implementation Examples
+## 💻 Developer Implementation Examples
 
-### 1. Dynamic Accessibility Context Provider (`AccessibilityContext.tsx`)
-This context provider orchestrates visual variables across the entire application viewport, dynamically mapping user overrides onto root custom CSS variables.
+### 1. Dynamic Accessibility Context Provider (`src/context/AccessibilityContext.tsx`)
+This context provider orchestrates visual variables across the entire application viewport, dynamically mapping user overrides onto root custom CSS variables and persisting settings to `localStorage`.
 
 ```typescript
-import React, { createContext, useContext, useState, useEffect } from 'react';
+"use client";
 
-export type DyslexiaFont = 'open-dyslexic' | 'sans-serif' | 'standard';
-export type ThemeColor = 'default-cream' | 'pastel-blue' | 'pastel-green' | 'high-contrast';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-interface AccessibilitySettings {
+export type DyslexiaFont = "open-dyslexic" | "sans-serif" | "standard";
+export type ThemeColor = "default-cream" | "pastel-blue" | "pastel-green" | "high-contrast";
+
+export interface AccessibilitySettings {
   fontFamily: DyslexiaFont;
-  lineHeight: number;
-  letterSpacing: number;
+  lineHeight: number;       // e.g. 1.8, 2.0
+  letterSpacing: number;    // e.g. 1.5, 3.0 (in px)
+  wordSpacing: number;      // e.g. 2.0, 4.0 (in px)
+  fontSizeMultiplier: number; // e.g. 1.0, 1.15, 1.3
   themeColor: ThemeColor;
-  fontSizeMultiplier: number;
   readingRulerEnabled: boolean;
-  speechSpeed: number;
+  readingRulerHeight: number; // e.g. 30, 45, 60
+  speechSpeed: number;      // e.g. 0.75, 0.85, 1.0
   distractionFree: boolean;
-  setSettings: React.Dispatch<React.SetStateAction<AccessibilitySettings>>;
 }
 
-const AccessibilityContext = createContext<AccessibilitySettings | undefined>(undefined);
+const defaultSettings: AccessibilitySettings = {
+  fontFamily: "open-dyslexic",
+  lineHeight: 1.8,
+  letterSpacing: 2.0,
+  wordSpacing: 4.0,
+  fontSizeMultiplier: 1.15,
+  themeColor: "default-cream",
+  readingRulerEnabled: false,
+  readingRulerHeight: 40,
+  speechSpeed: 0.8,
+  distractionFree: false,
+};
+
+const AccessibilityContext = createContext<AccessibilityContextProps | undefined>(undefined);
 
 export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [settings, setSettings] = useState<AccessibilitySettings>({
-    fontFamily: 'open-dyslexic',
-    lineHeight: 1.8,
-    letterSpacing: 2.0,
-    themeColor: 'default-cream',
-    fontSizeMultiplier: 1.15,
-    readingRulerEnabled: false,
-    speechSpeed: 0.85,
-    distractionFree: false,
-    setSettings: () => {},
-  });
+  const [settings, setSettings] = useState<AccessibilitySettings>(defaultSettings);
+  const [mounted, setMounted] = useState(false);
 
+  // Load from local storage on mount
   useEffect(() => {
+    setMounted(true);
+    const saved = localStorage.getItem("penpal_a11y_settings");
+    if (saved) {
+      try {
+        setSettings(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to parse visual setting configurations:", e);
+      }
+    }
+  }, []);
+
+  // Save to local storage and update CSS custom properties on root
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem("penpal_a11y_settings", JSON.stringify(settings));
+    }
+
     const root = document.documentElement;
 
-    // Dynamically update CSS custom properties on the DOM root
-    const fontMapping = {
-      'open-dyslexic': 'OpenDyslexic, "Comic Sans MS", Chalkboard SE, sans-serif',
-      'sans-serif': 'Arial, sans-serif',
-      'standard': 'system-ui, -apple-system, sans-serif'
-    };
+    let fontValue = "system-ui, -apple-system, sans-serif";
+    if (settings.fontFamily === "open-dyslexic") {
+      fontValue = "OpenDyslexic, 'Comic Sans MS', Chalkboard SE, sans-serif";
+    } else if (settings.fontFamily === "sans-serif") {
+      fontValue = "Arial, Helvetica, sans-serif";
+    }
+    root.style.setProperty("--font-family-current", fontValue);
+    root.style.setProperty("--line-height-current", `${settings.lineHeight}`);
+    root.style.setProperty("--letter-spacing-current", `${settings.letterSpacing}px`);
+    root.style.setProperty("--word-spacing-current", `${settings.wordSpacing}px`);
+    root.style.setProperty("--font-size-multiplier", `${settings.fontSizeMultiplier}`);
 
-    const bgColors = {
-      'default-cream': '#FCF9F2',
-      'pastel-blue': '#EBF4F6',
-      'pastel-green': '#F1F7ED',
-      'high-contrast': '#0F172A'
-    };
-
-    const textColors = {
-      'default-cream': '#2D2A24',
-      'pastel-blue': '#1E293B',
-      'pastel-green': '#1C2E1A',
-      'high-contrast': '#F8FAFC'
-    };
-
-    root.style.setProperty('--font-family-current', fontMapping[settings.fontFamily]);
-    root.style.setProperty('--theme-bg-color', bgColors[settings.themeColor]);
-    root.style.setProperty('--theme-text-color', textColors[settings.themeColor]);
-    root.style.setProperty('--font-size-multiplier', `${settings.fontSizeMultiplier}`);
-  }, [settings]);
+    const colors = getThemeColors(settings.themeColor);
+    root.style.setProperty("--theme-bg-color", colors.bg);
+    root.style.setProperty("--theme-text-color", colors.text);
+    root.style.setProperty("--theme-card-bg", colors.cardBg);
+    root.style.setProperty("--theme-border-color", colors.border);
+    root.style.setProperty("--theme-accent-color", colors.accent);
+  }, [settings, mounted]);
 
   return (
-    <AccessibilityContext.Provider value={{ ...settings, setSettings }}>
-      {children}
+    <AccessibilityContext.Provider value={{ ...settings, setSettings, resetToDefaults }}>
+      <div className="a11y-container" style={{ fontFamily: "var(--font-family-current)" }}>
+        {children}
+      </div>
     </AccessibilityContext.Provider>
   );
 };
-
-export const useAccessibility = () => {
-  const context = useContext(AccessibilityContext);
-  if (!context) throw new Error('useAccessibility must be used within an AccessibilityProvider');
-  return context;
-};
 ```
 
-### 2. Low-Latency Web Speech Wrapper (`useSpeech.ts`)
-This React hook abstracts browser voice synthesis and recognition, enabling low-stress, real-time auditory bimodal assistance.
+### 2. Web Speech API Hook (`src/hooks/useSpeech.ts`)
+This React hook abstracts browser voice synthesis and speech recognition with fallback simulation handling, enabling low-stress, real-time auditory bimodal assistance.
 
 ```typescript
-import { useState, useCallback } from 'react';
+"use client";
+
+import { useState, useCallback, useEffect } from "react";
+import { useAccessibility } from "@/context/AccessibilityContext";
 
 export const useSpeech = () => {
+  const { speechSpeed } = useAccessibility();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isListening, setIsListening] = useState(false);
 
-  const speak = useCallback((text: string, lang = 'es-ES', speed = 0.85) => {
-    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+  const speak = useCallback(
+    (text: string, lang = "es-ES") => {
+      if (typeof window === "undefined" || !window.speechSynthesis) return;
 
-    window.speechSynthesis.cancel(); // Terminate pending audio streams
+      window.speechSynthesis.cancel(); // Terminate pending utterances
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    utterance.rate = speed; // Slower pace tailored for phonetic processing
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      utterance.rate = speechSpeed; // Custom speech rate from context
 
-    utterance.onstart = () => setIsPlaying(true);
-    utterance.onend = () => setIsPlaying(false);
-    utterance.onerror = () => setIsPlaying(false);
+      utterance.onstart = () => setIsPlaying(true);
+      utterance.onend = () => setIsPlaying(false);
+      utterance.onerror = () => setIsPlaying(false);
 
-    window.speechSynthesis.speak(utterance);
-  }, []);
+      window.speechSynthesis.speak(utterance);
+    },
+    [speechSpeed]
+  );
 
-  const startListening = useCallback((onResult: (transcript: string) => void) => {
-    if (typeof window === 'undefined') return;
+  const startListening = useCallback(
+    (onResult: (text: string) => void, lang = "es-ES") => {
+      if (typeof window === "undefined") return;
 
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      alert("Voice speech recognition is not supported in this browser version. We recommend Google Chrome.");
-      return;
-    }
+      const SpeechRecognition =
+        (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'es-ES';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
+      if (!SpeechRecognition) {
+        // Fallback simulated listening if Web Speech API is not available
+        setIsListening(true);
+        setTimeout(() => {
+          setIsListening(false);
+          onResult("¡Hola PenPal! ¿Cómo estás hoy?");
+        }, 3000);
+        return;
+      }
 
-    recognition.onstart = () => setIsListening(true);
-    recognition.onend = () => setIsListening(false);
-    recognition.onerror = () => setIsListening(false);
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.lang = lang;
 
-    recognition.onresult = (event: any) => {
-      const resultText = event.results[0][0].transcript;
-      onResult(resultText);
-    };
+      recognition.onstart = () => setIsListening(true);
+      recognition.onresult = (event: any) => {
+        const resultText = event.results[0][0].transcript;
+        onResult(resultText);
+      };
+      recognition.onend = () => setIsListening(false);
 
-    recognition.start();
-  }, []);
+      recognition.start();
+    },
+    []
+  );
 
-  return { speak, startListening, isPlaying, isListening };
+  return { speak, stop, isPlaying, isListening, startListening };
 };
 ```
 
