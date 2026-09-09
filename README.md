@@ -1,120 +1,98 @@
 # PenPal 🎨✍️
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Next.js-14.2.15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-18.3.1-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-5.3.3-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-blueviolet?style=for-the-badge" alt="WCAG 2.1 AA Compliant" />
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License MIT" />
 </p>
 
 ### **Empowering Every Learner to Connect, Write, and Grow.**
 
-**PenPal** is an adaptive, social-first language learning platform engineered from the ground up for learners with dyslexia and visual processing differences. By combining state-of-the-art web accessibility standards (WCAG 2.1 AA), multi-sensory interactive features, and safe social connectivity, PenPal transforms foreign language acquisition from a source of anxiety into a supportive, engaging, and collaborative journey.
+**PenPal** is an adaptive, social-first language learning platform engineered specifically for learners with **dyslexia and visual processing differences**. By uniting web accessibility standards (**WCAG 2.1 AA**), multi-sensory interactive features, and supportive social connectivity, PenPal transforms foreign language acquisition into an inclusive, anxiety-free, and engaging experience.
 
 ---
 
 ## 📖 Table of Contents
-- [🌟 Problem Statement & Vision](#-problem-statement--vision)
-- [👥 Target Audiences & Brand Identity](#-target-audiences--brand-identity)
-- [🧩 Dyslexia-Friendly Design System](#-dyslexia-friendly-design-system)
-- [🚀 Key Core Features](#-key-core-features)
-- [🛡️ Privacy & Mock Data Persistence](#️-privacy--mock-data-persistence)
-- [🛠️ Technical Architecture & Directory Structure](#️-technical-architecture--directory-structure)
-- [💻 Deep Dive Developer Implementation Examples](#-deep-dive-developer-implementation-examples)
-- [⚙️ Local Installation & Environment Setup](#️-local-installation--environment-setup)
-- [🤝 Contribution Guidelines](#-contribution-guidelines)
+- [🌟 Vision & Core Philosophy](#-vision--core-philosophy)
+- [👥 Core Portals & User Roles](#-core-portals--user-roles)
+- [🧩 Dyslexia-Friendly Accessibility Suite](#-dyslexia-friendly-accessibility-suite)
+- [🛠️ System Architecture & Data Flow](#️-system-architecture--data-flow)
+- [📂 Directory Blueprint](#-directory-blueprint)
+- [💻 Technical Implementation Highlights](#-technical-implementation-highlights)
+- [⚙️ Getting Started & Local Setup](#️-getting-started--local-setup)
+- [🤝 Accessibility & Contribution Guidelines](#-accessibility--contribution-guidelines)
 - [📄 License](#-license)
 
 ---
 
-## 🌟 Problem Statement & Vision
+## 🌟 Vision & Core Philosophy
 
-Traditional language learning applications rely heavily on dense text walls, rapid gamified pressure timers, and high-contrast, glaring white interfaces. For individuals with dyslexia, visual crowding, or Irlen Syndrome (scotopic sensitivity), these standard interfaces introduce high cognitive overload, causing fatigue, frustration, and performance anxiety.
+Traditional language learning tools rely heavily on text-dense layouts, fast-paced gamified timers, and harsh high-contrast white backgrounds. For individuals with dyslexia, visual crowding, or Scotopic Sensitivity/Irlen Syndrome, these interfaces induce visual distortion, cognitive fatigue, and learning anxiety.
 
-**PenPal** bridges this digital divide. By introducing customizable pastel color overlays, adjustable bimodal sensory presentation (synchronized Text-to-Speech and Speech-to-Text), syllable/phonetic breakdown widgets, and stress-free asynchronous P2P communication, PenPal delivers an inclusive space where students feel secure, motivated, and fully supported in their language learning.
+**PenPal** reimagines language learning through an inclusive, multi-sensory design approach:
+- **Low-Stress Environment:** Replaces aggressive countdown clocks with asynchronous, self-paced penpal messaging.
+- **Visual Comfort:** Provides anti-glare pastel color themes and customizable line/letter/word spacing to reduce visual crowding.
+- **Bimodal Scaffolding:** Combines synchronized text-to-speech (TTS) and voice dictation (STT) so learners can hear, speak, and read simultaneously.
+- **Phonetic & Syllable Breakdown:** Offers color-coded syllable chunking and interactive translation tooltips for immediate vocabulary decoding.
 
 ---
 
-## 👥 Target Audiences & Brand Identity
+## 👥 Core Portals & User Roles
 
-Our branding and feature sets are carefully tailored to support four primary user categories:
+PenPal caters to a tri-portal model connecting students, family members, and educators in a unified learning ecosystem:
 
 ```
-                          ┌───────────────────────────┐
-                          │   PENPAL DOCKING STATION  │
-                          └─────────────┬─────────────┘
-                                        │
-             ┌──────────────────────────┼──────────────────────────┐
-             ▼                          ▼                          ▼
-   ┌───────────────────┐      ┌───────────────────┐      ┌───────────────────┐
-   │ Dyslexic Learner  │      │ Parents/Guardians │      │ SEN Departments   │
-   │  (Interactive)    │      │  (Insight & Care) │      │  (IEP Management) │
-   └───────────────────┘      └───────────────────┘      └───────────────────┘
+                            ┌───────────────────────────┐
+                            │    PENPAL DOCKING HUB     │
+                            └─────────────┬─────────────┘
+                                          │
+             ┌────────────────────────────┼────────────────────────────┐
+             ▼                            ▼                            ▼
+   ┌────────────────────┐       ┌────────────────────┐       ┌────────────────────┐
+   │   Learner Portal   │       │   Parent Portal    │       │   Educator Desk    │
+   │   `/dashboard`     │       │     `/parent`      │       │    `/educator`     │
+   └────────────────────┘       └────────────────────┘       └────────────────────┘
 ```
 
-### 1. Dyslexic & Neurodivergent Students
-* **Tone:** Warm, encouraging, playful, and low-stress.
-* **Experience:** Access to specialized typefaces (like **OpenDyslexic**), custom character/word spacing, an interactive highlight ruler, and bimodal dictation utilities to eliminate spelling anxiety.
+### 1. 🎓 Dyslexic Learner Portal (`/dashboard`)
+* **Asynchronous P2P Chat:** Connects students with penpals (e.g., *Mateo from Madrid*) featuring built-in translation assists and scaffolded sentence frames (e.g., *"Me gusta mucho..."*).
+* **Phonetic & Syllable Desk:** Clicking any word displays alternating color-coded syllables (e.g., **fút · bol** in rose/emerald blocks) and phonetic guides.
+* **Cooperative Quizzes:** Low-stress matching activities solved with partner hints rather than speed timers.
+* **Integrated Accessibility Widget:** On-demand access to font adjustments, reading ruler toggles, and audio controls.
 
-### 2. Parents & Guardians
-* **Tone:** Supportive, reassuring, and highly informative.
-* **Experience:** Real-time visibility into their child's language gains. Features a dedicated parent analytics panel showing vocabulary growth, message volume, and customizable remote font/theme adjustments to co-configure their child's workspace.
+### 2. 🏠 Parent Progress Portal (`/parent`)
+* **Stamina & Vocabulary Insights:** Real-time visibility into reading stamina, writing autonomy, and vocabulary acquisition.
+* **Remote Accommodation Controls:** Parents can co-configure their child's accessibility profile (e.g., font choice, background theme, playback rate) which synchronizes immediately to the learner's interface.
+* **Progress Report Export:** One-click generation of qualitative progress summaries for therapists, tutors, or school counselors.
 
-### 3. Special Education Needs (SEN) School Departments & Educators
-* **Tone:** Professional, data-driven, and highly compliant.
-* **Experience:** Classroom dashboards mapped directly to **IEP (Individualized Education Program)** targets. Educators can remotely toggle accommodation settings, log qualitative progress, and instantly export school-compliant progress portfolios.
-
-### 4. Accessibility Developers & Advocates
-* **Tone:** Clear, modular, and developer-friendly.
-* **Experience:** Clean, strongly-typed codebase featuring structured React Contexts, custom Web Speech hooks, semantic HTML layouts, and fully keyboard-navigable UI components.
-
----
-
-## 🧩 Dyslexia-Friendly Design System
-
-Rather than tacking accessibility on as an afterthought, PenPal embeds visual and cognitive scaffolding directly into its CSS and component primitives.
-
-### 🔠 Specialized Typography
-* **Dyslexia-Optimized Font-Face:** Dynamic typeface selector including **OpenDyslexic** (weighted baselines to prevent letter-flipping and rotation) and highly legible geometric sans-serif layouts.
-* **Interactive Spacing Controls:** Granular custom properties regulating letter-tracking, word-spacing, and line-height, designed specifically to reduce visual crowding effects.
-
-### 🎨 Visual Comfort & Contrast Control
-* **Irlen-Friendly Warm Pastel Backgrounds:** Choose from soft cream, pastel blue, pale mint green, or muted gray themes designed to eliminate harsh screen glare and help students focus.
-* **Interactive Reading Ruler:** A customizable overlay focus strip that tracks vertical cursor movement, dimming the rest of the viewport to guide the reader's eyes smoothly across text lines.
-* **Distraction-Free Mode:** Instantly hides side navigation, decorative stats, and background elements, leaving only the primary core workspace visible to promote sustained attention.
-
-### 🧠 Cognitive Scaffolding & Bimodal Design
-* **Bimodal Presentation:** Simultaneously displays written text and plays natural-tempo Spanish voice audio, helping map graphemes directly to phonemes.
-* **No-Stress Timers:** Replaces countdown clocks and competitive pressure with structured, asynchronous communication prompts, encouraging self-paced comprehension.
+### 3. 🏫 SEN Educator & Administration Desk (`/educator`)
+* **Classroom Roster Analytics:** Real-time progress monitoring mapped directly to Individualized Education Program (**IEP**) targets.
+* **Remote Accommodation Management:** Adjust visual parameters and reading supports for individual students or whole cohorts.
+* **Portfolio & Compliance Logging:** Export school-compliant growth portfolios and qualitative IEP goal achievements.
 
 ---
 
-## 🚀 Key Core Features
+## 🧩 Dyslexia-Friendly Accessibility Suite
 
-### 1. Interactive Learner Dashboard (`/dashboard`)
-* **Peer-to-Peer PenPal Matching:** Vetted matching with international partners (such as *Mateo from Madrid*). Includes structured conversation frames and translation assists.
-* **Word Breakdown Tooltip Desk:** Clicking any word in the chat immediately reveals a color-coded syllable breakdown, phonetic transcriptions, and localized translation.
-* **Syllable Color Scaffolding:** Visually separates syllables in alternating colors (e.g., **fút · bol** in rose/emerald blocks) to make pronunciation patterns intuitive.
-* **Asynchronous Writing Scaffolds:** Expandable writing helpers featuring Spanish sentence frames (e.g., *"Me gusta mucho..."*) and interactive vocabulary suggestion chips.
-* **Cooperative Quizzes:** Stress-free, collaborative matching activities solved with partner dialogue hints instead of competitive timers.
+PenPal builds accessibility directly into the core user experience rather than offering it as an afterthought:
 
-### 2. Parent Progress & Insights Board (`/parent`)
-* **Confidence Metrics Tracker:** Visual summary of the child's reading stamina, writing autonomy, and vocabulary acquisition.
-* **Parental Override Controls:** Parents can remotely customize default contrast themes, text-scaling, and vocal playback speeds to align with their child's daily stamina.
-* **Portfolio Exporter:** One-click generation of progress reports to share with clinical teams or educators.
-
-### 3. SEN Educator & Administration Desk (`/educator`)
-* **Classroom Roster Analytics:** Real-time visibility of student progression against set targets.
-* **IEP Goal Integration:** Direct mapping of application milestones (e.g., messages sent, reading ruler usage) to formal IEP objectives.
-* **Accommodation Override Controls:** Remotely adjust student font profiles, zoom scales, or default high-contrast layouts.
+| Feature | Description | Benefit for Dyslexic & Neurodivergent Learners |
+| :--- | :--- | :--- |
+| **OpenDyslexic Typography** | Specialized font with weighted baselines and unique letterforms. | Prevents letter flipping, rotation, and line skipping. |
+| **Granular Spacing Controls** | Adjustable letter spacing, word spacing, and line height. | Minimizes visual crowding and line blurring effects. |
+| **Anti-Glare Pastel Themes** | Warm Cream (`#FCF9F2`), Pastel Blue (`#EBF4F6`), Pastel Green (`#F1F7ED`), and High Contrast (`#0D0D0D`). | Eliminates glare and reduces visual fatigue caused by Scotopic Sensitivity. |
+| **Interactive Reading Ruler** | Movable focus band dimming non-target screen areas. | Helps guide vertical tracking and prevents skipping lines while reading. |
+| **Bimodal Audio (TTS & STT)** | Web Speech API integration with variable speed control (`0.75x` to `1.0x`). | Maps written graphemes to vocal phonemes in real time. |
+| **Distraction-Free Mode** | Instantly hides sidebars, statistics, and decorative UI elements. | Promotes sustained focus and reduces cognitive load. |
 
 ---
 
-## 🛡️ Privacy & Mock Data Persistence
+## 🛠️ System Architecture & Data Flow
 
-To prioritize visual security and keep our application entirely self-contained, **PenPal utilizes local storage (`localStorage`)** to mock database persistence and maintain cross-role settings dynamically.
+PenPal is a self-contained web application built on **Next.js App Router** and **React**. State persistence and cross-portal synchronicity are driven by browser `localStorage` and React Contexts.
 
 ```
                       ┌────────────────────────────────────────┐
@@ -124,197 +102,167 @@ To prioritize visual security and keep our application entirely self-contained, 
             ┌─────────────────────────────┼─────────────────────────────┐
             ▼                             ▼                             ▼
   ┌──────────────────┐          ┌──────────────────┐          ┌──────────────────┐
-  │  Learner Chat    │          │ Parent Remote    │          │  Classroom IEP   │
-  │  & Quiz Points   │          │ Accommodation    │          │  Progress Logs   │
+  │  penpal_messages │          │   penpal_a11y_   │          │  penpal_quiz_    │
+  │  & sent count    │          │     settings     │          │   points & vocab │
   └──────────────────┘          └──────────────────┘          └──────────────────┘
 ```
 
-* **Learner Activity Integration:** Student interaction metrics (such as messages dispatched or cooperative quiz scores earned) are written directly to local keys like `penpal_messages_sent_count` and `penpal_quiz_points`.
-* **Cross-Role Synchronicity:** When a parent or educator remotely updates Alex's typography settings or visual contrast values in their respective portals, the changes write to our centralized React state context and synchronize instantly to the learner's dashboard interface.
+### LocalStorage Keys Reference
+
+| LocalStorage Key | Purpose & Data Scope |
+| :--- | :--- |
+| `penpal_a11y_settings` | Visual overrides (font, line/word/letter spacing, pastel theme, reading ruler, speech rate). |
+| `penpal_messages` | Peer-to-peer chat history and exchanged messages. |
+| `penpal_messages_sent_count` | Quantitative count of sent messages used for engagement metrics. |
+| `penpal_quiz_points` | Cooperative quiz score accumulation. |
+| `penpal_learned_vocab` | Array of mastered vocabulary items. |
+| `penpal_auth_user` | Active session simulation role (Learner, Parent, or Educator). |
 
 ---
 
-## 🛠️ Technical Architecture & Directory Structure
-
-PenPal is engineered to be modern, modular, and extensible. We leverage **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**.
-
-### **Directory Blueprint**
+## 📂 Directory Blueprint
 
 ```
 /
-├── public/                 # Static assets (accessibility fonts, system vector icons)
+├── public/                 # Static assets and typography files
 ├── src/
 │   ├── app/                # Next.js App Router Pages and Layouts
-│   │   ├── layout.tsx      # Base HTML configuration with Accessibility Provider wraps
-│   │   ├── page.tsx        # Homepage introducing Simulation Role Selector
+│   │   ├── layout.tsx      # Root layout wrapped with AccessibilityProvider & AuthProvider
+│   │   ├── page.tsx        # Portal selection landing hub
 │   │   ├── dashboard/      # Interactive Dyslexic Learner Workspace
-│   │   ├── educator/       # SEN & Classroom Educator Dashboard
+│   │   ├── educator/       # SEN Educator IEP Desk
 │   │   └── parent/         # Parent Progress & Remote Setup Portal
-│   ├── components/         # Shared Reusable UI Primitives
-│   │   ├── a11y/           # Reading Ruler and Color Overlay Widgets
-│   │   └── NavigationHeader.tsx # Universal role selection bar
-│   ├── context/            # React Global State and Accessibility Contexts
-│   │   ├── AccessibilityContext.tsx # Central store managing contrast, fonts, and zoom
-│   │   └── AuthContext.tsx          # Mock user role authorization
+│   ├── components/         # Modular UI Primitives
+│   │   ├── a11y/           # Reading Ruler and Accessibility Settings Modal
+│   │   │   ├── A11yWidget.tsx
+│   │   │   └── ReadingRuler.tsx
+│   │   └── NavigationHeader.tsx # Universal portal switcher and accessibility bar
+│   ├── context/            # React Global State Providers
+│   │   ├── AccessibilityContext.tsx # Central theme, spacing, and font manager
+│   │   └── AuthContext.tsx          # Mock authentication and role context
 │   ├── hooks/              # Custom React Hooks
-│   │   ├── useSpeech.ts    # Audio wrapper using browser Web Speech API
-│   │   └── useMatch.ts     # P2P message state machine & mock chat generator
-│   └── styles/             # Global Configurations
-│       └── globals.css     # CSS Custom properties for typography & padding
-├── LICENSE                 # MIT License Document
-├── package.json            # Node dependencies & project scripts
-└── README.md               # Developer documentation & onboarding guide
+│   │   ├── useSpeech.ts    # Web Speech API wrapper for TTS and speech recognition
+│   │   └── useMatch.ts     # P2P conversation state machine & message store
+│   └── styles/             # Global CSS
+│       └── globals.css     # CSS Custom Properties and typography rules
+├── LICENSE                 # MIT Open Source License
+├── package.json            # Node dependencies and npm scripts
+├── postcss.config.js       # PostCSS configuration
+├── tailwind.config.js      # Tailwind CSS configuration
+└── tsconfig.json           # TypeScript configuration
 ```
 
 ---
 
-## 💻 Deep Dive Developer Implementation Examples
+## 💻 Technical Implementation Highlights
 
-### 1. Dynamic Accessibility Context Provider (`AccessibilityContext.tsx`)
-This context provider orchestrates visual variables across the entire application viewport, dynamically mapping user overrides onto root custom CSS variables.
+### 1. Dynamic Accessibility Context (`src/context/AccessibilityContext.tsx`)
+
+This context manages accessibility configurations, persisting settings to `localStorage` and dynamically setting root CSS custom variables across the DOM tree:
 
 ```typescript
-import React, { createContext, useContext, useState, useEffect } from 'react';
+"use client";
 
-export type DyslexiaFont = 'open-dyslexic' | 'sans-serif' | 'standard';
-export type ThemeColor = 'default-cream' | 'pastel-blue' | 'pastel-green' | 'high-contrast';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-interface AccessibilitySettings {
+export type DyslexiaFont = "open-dyslexic" | "sans-serif" | "standard";
+export type ThemeColor = "default-cream" | "pastel-blue" | "pastel-green" | "high-contrast";
+
+export interface AccessibilitySettings {
   fontFamily: DyslexiaFont;
-  lineHeight: number;
-  letterSpacing: number;
-  themeColor: ThemeColor;
+  lineHeight: number;       // e.g. 1.8, 2.0
+  letterSpacing: number;    // in px
+  wordSpacing: number;      // in px
   fontSizeMultiplier: number;
+  themeColor: ThemeColor;
   readingRulerEnabled: boolean;
-  speechSpeed: number;
+  readingRulerHeight: number;
+  speechSpeed: number;      // e.g. 0.75, 0.85, 1.0
   distractionFree: boolean;
-  setSettings: React.Dispatch<React.SetStateAction<AccessibilitySettings>>;
 }
 
-const AccessibilityContext = createContext<AccessibilitySettings | undefined>(undefined);
+interface AccessibilityContextProps extends AccessibilitySettings {
+  setSettings: React.Dispatch<React.SetStateAction<AccessibilitySettings>>;
+  resetToDefaults: () => void;
+}
+
+const AccessibilityContext = createContext<AccessibilityContextProps | undefined>(undefined);
 
 export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [settings, setSettings] = useState<AccessibilitySettings>({
-    fontFamily: 'open-dyslexic',
-    lineHeight: 1.8,
-    letterSpacing: 2.0,
-    themeColor: 'default-cream',
-    fontSizeMultiplier: 1.15,
-    readingRulerEnabled: false,
-    speechSpeed: 0.85,
-    distractionFree: false,
-    setSettings: () => {},
-  });
+  const [settings, setSettings] = useState<AccessibilitySettings>(defaultSettings);
 
   useEffect(() => {
     const root = document.documentElement;
 
-    // Dynamically update CSS custom properties on the DOM root
-    const fontMapping = {
-      'open-dyslexic': 'OpenDyslexic, "Comic Sans MS", Chalkboard SE, sans-serif',
-      'sans-serif': 'Arial, sans-serif',
-      'standard': 'system-ui, -apple-system, sans-serif'
-    };
+    // Apply font family variables
+    let fontValue = "system-ui, -apple-system, sans-serif";
+    if (settings.fontFamily === "open-dyslexic") {
+      fontValue = "OpenDyslexic, 'Comic Sans MS', Chalkboard SE, sans-serif";
+    } else if (settings.fontFamily === "sans-serif") {
+      fontValue = "Arial, Helvetica, sans-serif";
+    }
+    root.style.setProperty("--font-family-current", fontValue);
 
-    const bgColors = {
-      'default-cream': '#FCF9F2',
-      'pastel-blue': '#EBF4F6',
-      'pastel-green': '#F1F7ED',
-      'high-contrast': '#0F172A'
-    };
-
-    const textColors = {
-      'default-cream': '#2D2A24',
-      'pastel-blue': '#1E293B',
-      'pastel-green': '#1C2E1A',
-      'high-contrast': '#F8FAFC'
-    };
-
-    root.style.setProperty('--font-family-current', fontMapping[settings.fontFamily]);
-    root.style.setProperty('--theme-bg-color', bgColors[settings.themeColor]);
-    root.style.setProperty('--theme-text-color', textColors[settings.themeColor]);
-    root.style.setProperty('--font-size-multiplier', `${settings.fontSizeMultiplier}`);
+    // Apply spacing custom properties
+    root.style.setProperty("--line-height-current", `${settings.lineHeight}`);
+    root.style.setProperty("--letter-spacing-current", `${settings.letterSpacing}px`);
+    root.style.setProperty("--word-spacing-current", `${settings.wordSpacing}px`);
+    root.style.setProperty("--font-size-multiplier", `${settings.fontSizeMultiplier}`);
   }, [settings]);
 
   return (
-    <AccessibilityContext.Provider value={{ ...settings, setSettings }}>
-      {children}
+    <AccessibilityContext.Provider value={{ ...settings, setSettings, resetToDefaults }}>
+      <div className="a11y-container">{children}</div>
     </AccessibilityContext.Provider>
   );
 };
-
-export const useAccessibility = () => {
-  const context = useContext(AccessibilityContext);
-  if (!context) throw new Error('useAccessibility must be used within an AccessibilityProvider');
-  return context;
-};
 ```
 
-### 2. Low-Latency Web Speech Wrapper (`useSpeech.ts`)
-This React hook abstracts browser voice synthesis and recognition, enabling low-stress, real-time auditory bimodal assistance.
+### 2. Multi-Sensory Web Speech Hook (`src/hooks/useSpeech.ts`)
+
+This hook abstracts browser Web Speech API interactions, supporting rate-controlled Text-to-Speech playback and Speech Recognition dictation with built-in fallbacks:
 
 ```typescript
-import { useState, useCallback } from 'react';
+"use client";
+
+import { useState, useCallback, useEffect } from "react";
+import { useAccessibility } from "@/context/AccessibilityContext";
 
 export const useSpeech = () => {
+  const { speechSpeed } = useAccessibility();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isListening, setIsListening] = useState(false);
 
-  const speak = useCallback((text: string, lang = 'es-ES', speed = 0.85) => {
-    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+  const speak = useCallback(
+    (text: string, lang = "es-ES") => {
+      if (typeof window === "undefined" || !window.speechSynthesis) return;
 
-    window.speechSynthesis.cancel(); // Terminate pending audio streams
+      window.speechSynthesis.cancel(); // Cancel active playback
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    utterance.rate = speed; // Slower pace tailored for phonetic processing
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      utterance.rate = speechSpeed; // Adapted speech rate
 
-    utterance.onstart = () => setIsPlaying(true);
-    utterance.onend = () => setIsPlaying(false);
-    utterance.onerror = () => setIsPlaying(false);
+      utterance.onstart = () => setIsPlaying(true);
+      utterance.onend = () => setIsPlaying(false);
+      utterance.onerror = () => setIsPlaying(false);
 
-    window.speechSynthesis.speak(utterance);
-  }, []);
+      window.speechSynthesis.speak(utterance);
+    },
+    [speechSpeed]
+  );
 
-  const startListening = useCallback((onResult: (transcript: string) => void) => {
-    if (typeof window === 'undefined') return;
-
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      alert("Voice speech recognition is not supported in this browser version. We recommend Google Chrome.");
-      return;
-    }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'es-ES';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    recognition.onstart = () => setIsListening(true);
-    recognition.onend = () => setIsListening(false);
-    recognition.onerror = () => setIsListening(false);
-
-    recognition.onresult = (event: any) => {
-      const resultText = event.results[0][0].transcript;
-      onResult(resultText);
-    };
-
-    recognition.start();
-  }, []);
-
-  return { speak, startListening, isPlaying, isListening };
+  return { speak, stop, isPlaying, isListening, startListening };
 };
 ```
 
 ---
 
-## ⚙️ Local Installation & Environment Setup
-
-Follow these straightforward steps to boot up PenPal locally on your machine.
+## ⚙️ Getting Started & Local Setup
 
 ### Prerequisites
-* **Node.js** (v18.x or later recommended)
-* **npm** or **yarn** package manager
+* **Node.js** (v18.x or later)
+* **npm** or **yarn**
 
 ### 1. Clone the Repository
 ```bash
@@ -322,41 +270,47 @@ git clone https://github.com/FolatheDuckofDuckingburg/PenPal.git
 cd PenPal
 ```
 
-### 2. Install Project Dependencies
+### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-### 3. Start Local Development Server
+### 3. Run the Development Server
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) inside your web browser to interact with the application.
+Navigate to [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 4. Build and Compile for Production
+### 4. Build for Production
 ```bash
 npm run build
 ```
 
+### Available NPM Scripts
+- `npm run dev` — Starts the Next.js development server at port 3000.
+- `npm run build` — Compiles optimized production build.
+- `npm run start` — Boots the compiled production server.
+- `npm run lint` — Runs ESLint checks across the codebase.
+
 ---
 
-## 🤝 Contribution Guidelines
+## 🤝 Accessibility & Contribution Guidelines
 
-We warmly welcome contributions from developers, accessibility researchers, designers, and educators!
+We welcome contributions from developers, accessibility specialists, designers, and educators!
 
-1. **Fork the Repo** and create a descriptively named feature branch (`feature/reading-ruler-improvements`).
-2. **Commit with Intention:** Write clear, informative commit messages explaining your modifications.
-3. **Keep Code Accessible:** All modified or newly added modules must align with WCAG 2.1 AA design patterns, incorporate descriptive semantic `aria-*` markers, and support 100% keyboard-navigable operations.
-4. **Submit a Pull Request:** Outline your changes clearly, linking any related issues and, where possible, attaching screenshots or screen recordings showing visual accessibility features in action.
+When contributing, please follow these core standards:
+1. **WCAG 2.1 AA Compliance:** All UI components must maintain strong contrast ratios, accessible ARIA attributes (`aria-expanded`, `aria-label`, `aria-live`), and keyboard navigation support.
+2. **Keyboard Accessibility:** Ensure all interactive elements can be focused and triggered using standard `Tab`, `Space`, and `Enter` keys.
+3. **Clean Component Scaffolding:** Avoid embedding inline hardcoded font sizes or background colors; utilize CSS variables defined in `AccessibilityContext`.
 
 ---
 
 ## 📄 License
 
-This software is open-source, licensed under the terms of the [MIT License](LICENSE).
+PenPal is open-source software licensed under the [MIT License](LICENSE).
 
 ---
 
 <p align="center">
-  Made with 💙 and ☕ — Bridging communication gaps, one inclusive letter at a time.
+  Made with 💙 — Bridging communication gaps, one inclusive message at a time.
 </p>
