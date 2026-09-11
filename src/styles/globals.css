@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Specially designed OpenDyslexic Font to eliminate scotopic sensitivity / Irlen glare and prevent flipping */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Specially designed OpenDyslexic Font to eliminate scotopic sensitivity / Irlen glare and prevent letter flipping */
 @font-face {
   font-family: 'OpenDyslexic';
   src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/dist/woff/OpenDyslexic-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -15,19 +18,23 @@
   src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/dist/woff/OpenDyslexic-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 :root {
-  --font-family-current: OpenDyslexic, "Comic Sans MS", Chalkboard SE, sans-serif;
+  --font-family-current: 'Lexend', OpenDyslexic, 'Atkinson Hyperlegible', sans-serif;
   --line-height-current: 1.8;
-  --letter-spacing-current: 2px;
-  --word-spacing-current: 4px;
-  --font-size-multiplier: 1.15;
-  --theme-bg-color: #FCF9F2;
-  --theme-text-color: #2D2A24;
+  --letter-spacing-current: 1.5px;
+  --word-spacing-current: 3px;
+  --font-size-multiplier: 1.05;
+  --theme-bg-color: #FAF6EE;
+  --theme-text-color: #23201B;
   --theme-card-bg: #FFFFFF;
-  --theme-border-color: #E9E3D3;
-  --theme-accent-color: #3B82F6;
+  --theme-card-subtle: #F5EFE3;
+  --theme-border-color: #E6DCB8;
+  --theme-accent-color: #3B67E8;
+  --theme-accent-hover: #2952D1;
+  --theme-highlight: #FEF08A;
 }
 
 body {
@@ -40,31 +47,83 @@ body {
   font-size: calc(1rem * var(--font-size-multiplier));
   transition: background-color 0.25s ease, color 0.25s ease, font-family 0.25s ease;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 /* Accessibility dynamic utilities */
 .a11y-container {
   font-size: calc(1rem * var(--font-size-multiplier));
+  font-family: var(--font-family-current);
+}
+
+/* Airmail decorative border pattern */
+.airmail-strip {
+  background: repeating-linear-gradient(
+    -45deg,
+    #E11D48 0,
+    #E11D48 12px,
+    transparent 12px,
+    transparent 18px,
+    #2563EB 18px,
+    #2563EB 30px,
+    transparent 30px,
+    transparent 36px
+  );
+  height: 6px;
+  width: 100%;
+}
+
+/* Postage stamp scalloped border simulation */
+.stamp-edge {
+  position: relative;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+}
+
+/* Soft paper texture & tactile card lift */
+.paper-card {
+  background-color: var(--theme-card-bg);
+  border: 1px solid var(--theme-border-color);
+  box-shadow: 0 4px 14px -2px rgba(45, 38, 25, 0.05), 0 1px 3px 0 rgba(45, 38, 25, 0.03);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.paper-card:hover {
+  box-shadow: 0 8px 24px -4px rgba(45, 38, 25, 0.08), 0 2px 6px 0 rgba(45, 38, 25, 0.04);
 }
 
 /* Scrollbars customized to avoid harsh high contrast lines */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.02);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 116, 139, 0.25);
-  border-radius: 4px;
+  background: rgba(100, 116, 139, 0.28);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(100, 116, 139, 0.45);
 }
 
-/* Focus styles for Keyboard Navigability */
+/* Clear, accessible keyboard navigation focus states */
 *:focus-visible {
-  outline: 3px solid var(--theme-accent-color);
-  outline-offset: 2px;
+  outline: 3px solid var(--theme-accent-color) !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
 }
+
+/* Subtle soundwave pulse animation */
+@keyframes audioPulse {
+  0%, 100% { height: 6px; }
+  50% { height: 24px; }
+}
+
+.audio-bar-1 { animation: audioPulse 0.9s ease-in-out infinite; }
+.audio-bar-2 { animation: audioPulse 0.9s ease-in-out 0.2s infinite; }
+.audio-bar-3 { animation: audioPulse 0.9s ease-in-out 0.4s infinite; }
+.audio-bar-4 { animation: audioPulse 0.9s ease-in-out 0.6s infinite; }

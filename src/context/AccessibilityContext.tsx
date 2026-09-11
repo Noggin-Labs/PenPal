@@ -2,37 +2,50 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-export type DyslexiaFont = "open-dyslexic" | "sans-serif" | "standard";
-export type ThemeColor = "default-cream" | "pastel-blue" | "pastel-green" | "high-contrast";
+export type DyslexiaFont = "lexend" | "open-dyslexic" | "atkinson" | "sans-serif";
+export type ThemeColor =
+  | "default-cream"
+  | "pastel-blue"
+  | "pastel-green"
+  | "rose-twilight"
+  | "solar-amber"
+  | "high-contrast";
+
+export type RulerMode = "strip" | "mask" | "underline";
 
 export interface AccessibilitySettings {
   fontFamily: DyslexiaFont;
-  lineHeight: number;       // e.g. 1.8, 2.0
-  letterSpacing: number;    // e.g. 1.5, 3.0 (in px)
-  wordSpacing: number;      // e.g. 2.0, 4.0 (in px)
-  fontSizeMultiplier: number; // e.g. 1.0, 1.15, 1.3
+  lineHeight: number;
+  letterSpacing: number;
+  wordSpacing: number;
+  fontSizeMultiplier: number;
   themeColor: ThemeColor;
   readingRulerEnabled: boolean;
-  readingRulerHeight: number; // e.g. 30, 45, 60
-  speechSpeed: number;      // e.g. 0.75, 0.85, 1.0
+  readingRulerHeight: number;
+  rulerMode: RulerMode;
+  speechSpeed: number;
+  audioFeedback: boolean;
   distractionFree: boolean;
 }
 
 interface AccessibilityContextProps extends AccessibilitySettings {
   setSettings: React.Dispatch<React.SetStateAction<AccessibilitySettings>>;
   resetToDefaults: () => void;
+  playTactileChime: (type?: "pop" | "chime" | "success") => void;
 }
 
 const defaultSettings: AccessibilitySettings = {
-  fontFamily: "open-dyslexic",
+  fontFamily: "lexend",
   lineHeight: 1.8,
-  letterSpacing: 2.0,
-  wordSpacing: 4.0,
-  fontSizeMultiplier: 1.15,
+  letterSpacing: 1.5,
+  wordSpacing: 3.5,
+  fontSizeMultiplier: 1.05,
   themeColor: "default-cream",
   readingRulerEnabled: false,
-  readingRulerHeight: 40,
-  speechSpeed: 0.8,
+  readingRulerHeight: 48,
+  rulerMode: "strip",
+  speechSpeed: 0.85,
+  audioFeedback: true,
   distractionFree: false,
 };
 
@@ -42,33 +55,36 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
   const [settings, setSettings] = useState<AccessibilitySettings>(defaultSettings);
   const [mounted, setMounted] = useState(false);
 
-  // Load from local storage on mount
+  // Load from localStorage on mount
   useEffect(() => {
     setMounted(true);
-    const saved = localStorage.getItem("penpal_a11y_settings");
+    const saved = localStorage.getItem("penpal_a11y_settings_v2");
     if (saved) {
       try {
-        setSettings(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        setSettings((prev) => ({ ...prev, ...parsed }));
       } catch (e) {
-        console.error("Failed to parse visual setting configurations:", e);
+        console.error("Failed to parse accessibility settings:", e);
       }
     }
   }, []);
 
-  // Save to local storage on change
+  // Save to localStorage on change and apply CSS variables
   useEffect(() => {
     if (mounted) {
-      localStorage.setItem("penpal_a11y_settings", JSON.stringify(settings));
+      localStorage.setItem("penpal_a11y_settings_v2", JSON.stringify(settings));
     }
 
     const root = document.documentElement;
 
     // Apply font variables
-    let fontValue = "system-ui, -apple-system, sans-serif";
+    let fontValue = "'Lexend', system-ui, sans-serif";
     if (settings.fontFamily === "open-dyslexic") {
-      fontValue = "OpenDyslexic, 'Comic Sans MS', Chalkboard SE, sans-serif";
+      fontValue = "OpenDyslexic, 'Comic Sans MS', sans-serif";
+    } else if (settings.fontFamily === "atkinson") {
+      fontValue = "'Atkinson Hyperlegible', sans-serif";
     } else if (settings.fontFamily === "sans-serif") {
-      fontValue = "Arial, Helvetica, sans-serif";
+      fontValue = "'Plus Jakarta Sans', Arial, sans-serif";
     }
     root.style.setProperty("--font-family-current", fontValue);
 
@@ -83,61 +99,144 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
     root.style.setProperty("--theme-bg-color", colors.bg);
     root.style.setProperty("--theme-text-color", colors.text);
     root.style.setProperty("--theme-card-bg", colors.cardBg);
+    root.style.setProperty("--theme-card-subtle", colors.cardSubtle);
     root.style.setProperty("--theme-border-color", colors.border);
     root.style.setProperty("--theme-accent-color", colors.accent);
+    root.style.setProperty("--theme-accent-hover", colors.accentHover);
   }, [settings, mounted]);
 
   const resetToDefaults = () => {
     setSettings(defaultSettings);
   };
 
+  // Subtle web audio synthesizer for pleasant non-jarring feedback
+  const playTactileChime = (type: "pop" | "chime" | "success" = "pop") => {
+    if (!settings.audioFeedback) return;
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (type === "pop") {
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(440, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.08);
+      } else if (type === "chime") {
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.18); // A5
+        gain.gain.setValueAtTime(0.06, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.18);
+      } else if (type === "success") {
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+        osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08); // E5
+        osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16); // G5
+        gain.gain.setValueAtTime(0.07, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.28);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.28);
+      }
+    } catch {
+      // Audio context may be restricted before user gesture
+    }
+  };
+
   const getThemeColors = (theme: ThemeColor) => {
     switch (theme) {
       case "default-cream":
         return {
-          bg: "#FCF9F2", // Warm anti-glare cream
-          text: "#2D2A24", // Muted charcoal for softer contrast
+          bg: "#FAF6EE", // Warm soothing anti-glare parchment
+          text: "#24201A",
           cardBg: "#FFFFFF",
-          border: "#E9E3D3",
-          accent: "#3B82F6",
+          cardSubtle: "#F5EFE3",
+          border: "#E5DCC5",
+          accent: "#3B67E8",
+          accentHover: "#2750CA",
         };
       case "pastel-blue":
         return {
-          bg: "#EBF4F6", // Soft pastel blue
-          text: "#1E293B",
+          bg: "#F0F5FA", // Serene sky anti-glare
+          text: "#152438",
           cardBg: "#FFFFFF",
-          border: "#CBD5E1",
+          cardSubtle: "#E5EEF7",
+          border: "#CCDCEB",
           accent: "#0284C7",
+          accentHover: "#0369A1",
         };
       case "pastel-green":
         return {
-          bg: "#F1F7ED", // Pastel leaf green
-          text: "#1C2D1F",
+          bg: "#F2F7F2", // Soothing meadow sage
+          text: "#152E1C",
           cardBg: "#FFFFFF",
-          border: "#D1E2D3",
-          accent: "#16A34A",
+          cardSubtle: "#E5EFE6",
+          border: "#CCE0CE",
+          accent: "#15803D",
+          accentHover: "#166534",
+        };
+      case "rose-twilight":
+        return {
+          bg: "#FCF4F6", // Calming rose twilight
+          text: "#331622",
+          cardBg: "#FFFFFF",
+          cardSubtle: "#F7E8ED",
+          border: "#EDD3DC",
+          accent: "#C026D3",
+          accentHover: "#A21CAF",
+        };
+      case "solar-amber":
+        return {
+          bg: "#FBF5E9", // Warm solar sepia
+          text: "#2E210E",
+          cardBg: "#FFFFFF",
+          cardSubtle: "#F5EAD4",
+          border: "#E9DAC0",
+          accent: "#D97706",
+          accentHover: "#B45309",
         };
       case "high-contrast":
         return {
-          bg: "#0D0D0D", // Deep dark
-          text: "#F3F4F6", // Vibrant light
-          cardBg: "#1F2937",
-          border: "#4B5563",
-          accent: "#FBBF24",
+          bg: "#121417", // Midnight charcoal (no harsh pitch black)
+          text: "#F8FAFC",
+          cardBg: "#1C1F26",
+          cardSubtle: "#252A33",
+          border: "#3B4252",
+          accent: "#FACC15",
+          accentHover: "#EAB308",
         };
       default:
         return {
-          bg: "#FCF9F2",
-          text: "#2D2A24",
+          bg: "#FAF6EE",
+          text: "#24201A",
           cardBg: "#FFFFFF",
-          border: "#E9E3D3",
-          accent: "#3B82F6",
+          cardSubtle: "#F5EFE3",
+          border: "#E5DCC5",
+          accent: "#3B67E8",
+          accentHover: "#2750CA",
         };
     }
   };
 
   return (
-    <AccessibilityContext.Provider value={{ ...settings, setSettings, resetToDefaults }}>
+    <AccessibilityContext.Provider
+      value={{
+        ...settings,
+        setSettings,
+        resetToDefaults,
+        playTactileChime,
+      }}
+    >
       <div
         style={{
           fontFamily: "var(--font-family-current)",
@@ -147,7 +246,7 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
           backgroundColor: "var(--theme-bg-color)",
           color: "var(--theme-text-color)",
           minHeight: "100vh",
-          transition: "all 0.25s ease",
+          transition: "background-color 0.25s ease, color 0.25s ease",
         }}
         className="a11y-container"
       >
