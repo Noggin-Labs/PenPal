@@ -113,11 +113,11 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold shadow-sm">
                 <Sparkles className="h-3.5 w-3.5 text-amber-600" />
-                Adaptive Social Language Learning
+                Language Learning for Dyslexia
               </div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-bold">
                 <FileCheck className="h-3.5 w-3.5 text-blue-600" />
-                WCAG 2.1 AA & Scotopic Certified
+                Created by Noggin-Labs
               </div>
             </div>
 
@@ -133,7 +133,7 @@ export default function Home() {
                 </span>
               </h1>
               <p className="text-lg sm:text-xl text-slate-700 leading-relaxed max-w-3xl mx-auto font-medium" style={{ color: "var(--theme-text-color)" }}>
-                Designed from the ground up for learners with <strong>dyslexia, scotopic/Irlen sensitivity, and ADHD</strong>. Connect with friendly global penpals through bimodal reading, colored syllable chunks, timer-free collaboration, and anti-glare palettes.
+                PenPal is designed from the ground up for learners with <strong>dyslexia, scotopic/Irlen sensitivity, and ADHD</strong>. Connect with friendly global penpals through bimodal reading, colored syllable chunks, timer-free collaboration, and anti-glare palettes.
               </p>
             </div>
 
@@ -178,7 +178,7 @@ export default function Home() {
                 onClick={() => handleRoleSelection("learner")}
                 className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black text-base shadow-lg shadow-blue-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2.5"
               >
-                <span>✍️ Open Learner Desk</span>
+                <span>✍️ Open Learner Dashboard</span>
                 <ChevronRight className="h-5 w-5" />
               </button>
               <button
@@ -186,13 +186,13 @@ export default function Home() {
                 className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-base border-2 border-slate-200 shadow-sm transition-all hover:border-slate-300 flex items-center justify-center gap-2"
                 style={{ backgroundColor: "var(--theme-card-bg)", borderColor: "var(--theme-border-color)", color: "var(--theme-text-color)" }}
               >
-                <span>👩‍👦 Parent Insights</span>
+                <span>👩‍👦 Parent Dashboard</span>
               </button>
               <button
                 onClick={() => handleRoleSelection("educator")}
                 className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-base border-2 border-emerald-200 shadow-sm transition-all flex items-center justify-center gap-2"
               >
-                <span>👨‍🏫 SEN Educator Suite</span>
+                <span>👨‍🏫 SEN Educator Dashboard</span>
               </button>
             </div>
 
@@ -334,7 +334,7 @@ export default function Home() {
                   For Students & Kids
                 </div>
                 <h3 className="text-2xl font-black text-slate-900 mb-3 flex items-center gap-1.5 group-hover:text-blue-600 transition-colors" style={{ color: "var(--theme-text-color)" }}>
-                  Learner Atelier
+                  Learner Dashboard
                   <ChevronRight className="h-5 w-5 text-blue-500 transition-transform group-hover:translate-x-1" />
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
@@ -358,7 +358,7 @@ export default function Home() {
               </div>
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600">
-                <span>Enter Learner Desk</span>
+                <span>Enter Learner Dashboard</span>
                 <ArrowRight className="h-4 w-4" />
               </div>
             </div>
@@ -377,7 +377,7 @@ export default function Home() {
                   For Families & Guardians
                 </div>
                 <h3 className="text-2xl font-black text-slate-900 mb-3 flex items-center gap-1.5 group-hover:text-purple-600 transition-colors" style={{ color: "var(--theme-text-color)" }}>
-                  Parent Insights
+                  Parent Dashboard
                   <ChevronRight className="h-5 w-5 text-purple-500 transition-transform group-hover:translate-x-1" />
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
@@ -401,7 +401,7 @@ export default function Home() {
               </div>
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-purple-600">
-                <span>Open Parent Portal</span>
+                <span>Open Parent Dashboard</span>
                 <ArrowRight className="h-4 w-4" />
               </div>
             </div>
@@ -420,7 +420,7 @@ export default function Home() {
                   For SEN Coordinators & Teachers
                 </div>
                 <h3 className="text-2xl font-black text-slate-900 mb-3 flex items-center gap-1.5 group-hover:text-emerald-600 transition-colors" style={{ color: "var(--theme-text-color)" }}>
-                  SEN Educator Suite
+                  SEN Educator Dashboard
                   <ChevronRight className="h-5 w-5 text-emerald-500 transition-transform group-hover:translate-x-1" />
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
@@ -444,7 +444,7 @@ export default function Home() {
               </div>
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600">
-                <span>Open SEN Roster</span>
+                <span>Open SEN Dashboard</span>
                 <ArrowRight className="h-4 w-4" />
               </div>
             </div>
@@ -456,7 +456,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-xs font-black uppercase tracking-widest text-blue-600 mb-2 block">
-                Evidence-Based Sensory Design
+                Powered by Neuroscience Research
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight" style={{ color: "var(--theme-text-color)" }}>
                 Why Neurodiverse Minds Excel with PenPal
@@ -523,7 +523,7 @@ export default function Home() {
                 <Globe className="h-3.5 w-3.5" /> Global Correspondence Network
               </div>
               <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mb-4" style={{ color: "var(--theme-text-color)" }}>
-                From Madrid to London, Bogotá to Tokyo.
+                From the United States to London, Bogotá to India.
               </h2>
               <p className="text-base text-slate-600 leading-relaxed mb-8">
                 Over 14,000 asynchronous letters exchanged across 32 countries. Learners share passions for drawing, football, culinary arts, and music while building language confidence at their own pace.
@@ -532,15 +532,15 @@ export default function Home() {
               <div className="flex flex-wrap gap-6 pt-2">
                 <div>
                   <span className="block text-3xl font-black text-blue-600">100%</span>
-                  <span className="text-xs text-slate-500 font-bold">Timer-Free Exchanges</span>
+                  <span className="text-xs text-slate-500 font-bold">Free Forever</span>
                 </div>
                 <div className="border-l pl-6 border-slate-200">
                   <span className="block text-3xl font-black text-emerald-600">84%</span>
                   <span className="text-xs text-slate-500 font-bold">Confidence Gain</span>
                 </div>
                 <div className="border-l pl-6 border-slate-200">
-                  <span className="block text-3xl font-black text-purple-600">WCAG 2.1</span>
-                  <span className="text-xs text-slate-500 font-bold">AA Accessibility Standard</span>
+                  <span className="block text-3xl font-black text-purple-600">Adaptive</span>
+                  <span className="text-xs text-slate-500 font-bold">Learning</span>
                 </div>
               </div>
             </div>
@@ -562,13 +562,13 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-6 text-xs font-bold text-slate-600">
-            <button onClick={() => handleRoleSelection("learner")} className="hover:text-blue-600">Learner Desk</button>
-            <button onClick={() => handleRoleSelection("parent")} className="hover:text-purple-600">Parent Portal</button>
-            <button onClick={() => handleRoleSelection("educator")} className="hover:text-emerald-600">SEN Educator</button>
+            <button onClick={() => handleRoleSelection("learner")} className="hover:text-blue-600">Learner Dashboard</button>
+            <button onClick={() => handleRoleSelection("parent")} className="hover:text-purple-600">Parent Dashboard</button>
+            <button onClick={() => handleRoleSelection("educator")} className="hover:text-emerald-600">SEN Dashboard</button>
           </div>
 
           <div className="text-xs text-slate-400">
-            © 2026 PenPal Project. Fully WCAG 2.1 AA Compliant.
+            © 2026 PenPal. Created by Folarera Kassim (ORCiD: 0009-0007-2148-5675)
           </div>
         </div>
       </footer>
